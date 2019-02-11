@@ -10,7 +10,7 @@ function animateNumbers(elem,new_val){
 		}
 	})
 }
-
+//1st commit
 function number_format( number, decimals, dec_point, thousands_sep ) {
 
 	var i, j, kw, kd, km;
