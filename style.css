@@ -1,4 +1,4 @@
-﻿html {
+html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -14725,7 +14725,7 @@ p.composition__item__detail {
 	font-size: 20px;
 	font-weight: 400;
 	opacity: .8;
-	background: rgba(0,0,0,.1);
+	background: rgb(245, 245, 245);
 	border-radius: 3px 3px 0 0;
 }
 .md-show {
@@ -14872,6 +14872,22 @@ p.composition__item__detail {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+/*#popover-ingridients-filter { background: #fff}*/
+
+#gift-modal {
+    width: 880px;
+    height: 530px;
+    left: 0;
+    right: 0;
+    margin: 10% auto;
+}
+#gift-modal .md-content {
+    background: #fff;
+    padding: 20px 0;
+    padding: 12px 24px;
+}
+.modal-backdrop:not(.show) {display: none}
+
 .md-modal label {
 	display: block;
 	padding-left: 15px;
@@ -14887,7 +14903,7 @@ p.composition__item__detail {
 	top: -1px;
 	overflow: hidden;
 }
-/*#popover-ingridients-filter { background: #fff}*/
+/*.gift-progress-info .progress-container .native_text, .gift-progress-info .progress-container .hover_text { color: transparent; }*/
 
 @media screen and (max-width: 479px) {
 	#callback-modal {width: auto}
