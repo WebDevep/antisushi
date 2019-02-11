@@ -14872,6 +14872,21 @@ p.composition__item__detail {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+.md-modal label {
+	display: block;
+	padding-left: 15px;
+	text-indent: -15px;
+}
+.md-modal input[type="checkbox"] {
+	width: 13px !important;
+	height: 19px;
+	padding: 0;
+	margin: 0 8px 0 0;
+	vertical-align: bottom;
+	position: relative;
+	top: -1px;
+	overflow: hidden;
+}
 /*#popover-ingridients-filter { background: #fff}*/
 
 @media screen and (max-width: 479px) {
