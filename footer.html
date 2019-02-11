@@ -1,0 +1,993 @@
+{{ define "footer" }}
+
+{{ if .IsMobile }}
+
+<footer class="font-fix">
+	<div class="container">
+		<div class="text-block">
+			<div class="phone"><a href="tel:+74732295854">+7 (473) 229-58-54</a></div>
+			<div class="phone-desc">Служба доставки</div>
+		</div>
+		<div class="social-icons-footer">
+		</div>
+	</div>
+</footer>
+
+
+<script>
+{{$Basket := GetBasket .Session }};
+if ({{$Basket.TotalPrice}} > 0) {
+	animateNumbers($('.basket-header-sum span').first(),{{$Basket.TotalPrice}});
+	$('.basket-toggle').addClass('active_')
+	$('.basket-toggle .basket-header-sum').show();	
+	$('.basket-toggle svg').hide();
+};
+if (window.location.pathname == '/checkout/'){
+renderCheckout({{$Basket}});
+getcheckoutbasket();
+}else{
+renderBasket();
+};
+//calcGifts({{$Basket.GiftPrice}});
+</script>
+<script>
+{{$User := GetCurrentUser .Session }};
+checkoutuser({{$User}});
+</script>
+
+{{ else }} 
+<footer>
+	<div class="container">
+		<div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4">Антисуши</div>
+		<div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4 text-xs-center social-icons-footer">
+			<a href="https://vk.com/antisushi_vrn" rel="nofollow" class="sprite sprite-social_vk" target="_blank"></a>
+			<a href="https://www.instagram.com/antisushi_vrn/" rel="nofollow" class="sprite sprite-social_instagram" target="_blank"></a>
+		</div>
+		<div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4 text-xs-right"></div>
+	</div>
+</footer>
+</div>
+
+
+<div id="product-detail" class="modal fade" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content">
+		<div class="product-close" data-dismiss="modal">
+						<img src="/assets/images/product_delete.png">
+					</div>
+					<div class="spinner"></div>
+					<div class="row product product-detail"> 
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="preview">
+								<div class="product-labels"></div>
+								<div class="without-sale" title="На этот товар не действуют дополнительные скидки и акции"></div>
+								<img class="prod-image-l">
+								<div class="likes">
+									<div class="like-content">
+										<div class="like-icon"></div><span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 prod-info-cont">
+							<div class="product-info fix-height">
+								<h3></h3>
+								<div class="product-description">
+			  
+									<p></p>
+									<div class="composition">
+										<a href="#" class="composition__item detail" data-roll-id="">
+											<div class="composition__item__popover detail" data-roll-id="">
+												<div class="composition__item__image"><img src=""></div>
+												<div class="composition__item__text">
+													<p class="composition__item__name"><strong></strong></p>
+													<p class="composition__item__detail"></p>
+												</div>
+											</div>
+										</a>
+									</div>
+								</div>
+								<br>
+								<div class="product-energy"><a href="#">Энергетическая ценность</a>
+									<div class="energy-value-content">
+										<ul>
+											<li style="display: none"><span class="meta-property protein">
+							  <div>Белки</div></span><span class="meta-value"></span></li>
+											<li style="display: none"><span class="meta-property fats">
+							  <div>Жиры</div></span><span class="meta-value"></span></li>
+											<li style="display: none"><span class="meta-property carbo">
+							  <div>Углеводы</div></span><span class="meta-value"></span></li>
+											<li>
+												<span class="meta-property energy">
+							  <div>Калорийность</div></span><span class="meta-value"></span></li>
+										</ul>
+									</div>
+								</div>
+								<div class="product-options"></div>
+								<div class="_detail-price-cont">
+								<div class="product-prices font-fix">
+									<span class="old-price"> <span class="line-through"></span><span class="currency">R</span></span><span class="current-price"><span></span><span class="currency">R</span></span><span class="weight"><span></span><span></span></span>
+
+								</div>
+								</div>
+								<div class="product-actions">
+									<div class="progress-container" style="display: none;position: relative;">
+										<div style="width: 100%;" class="progress-bar"></div>
+										<div class="progress-bar-content font-fix">
+											<div></div>
+										</div>
+									</div>    
+									<a href="#" class="add-to-cart-btn">В корзину</a>
+								
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+	</div>
+	</div>			  
+
+		<div class="gift-sticky hidden-md-down">
+			  <div class="collapsed-gift">
+				<div class="gift-toggle ">
+				  <svg viewBox="0 0 512 512"><path d="m393.2,105.9c9.3-10 15.1-23.6 15.1-38.6 0-31.3-25-56.3-55.3-56.3-23,0-76,34.4-97.2,65.3-21.9-30.9-74.7-64.3-96.8-64.3-30.2,0-55.3,25-55.3,56.3 0,14.5 5.4,27.6 14.1,37.5h-106.8v134.5h29.2v260.7h153.3 125.1 153.3v-260.6h29.1v-134.5h-107.8zm-40.2-74c18.8-7.10543e-15 34.4,15.6 34.4,36.5 0,17.6-12.3,32.7-28.2,35.9h-84.6c-5.4-1.6-7.1-3.5-7.1-4.6 0-17.8 62.5-67.8 85.5-67.8zm-194-0c21.9,0 85.5,50 85.5,67.8 0,1.6-3.7,3.4-6.4,4.6h-85.2c-15.9-3.2-28.2-18.3-28.2-35.9-0.1-19.9 15.6-36.5 34.3-36.5zm34.4,448.2h-132.4v-239.7h132.4v239.7zm0-259.5h-161.5v-93.8h161.6v93.8zm104.2,259.5h-83.4v-353.4h83.4v353.4zm153.3,0h-132.4v-239.7h132.4v239.7zm29.1-259.5h-161.5v-93.8h161.6v93.8z"/></svg>
+				</div>
+				<div class="grade-cont">
+				  <div class="grade" style="height: 0%;"></div>
+				</div>
+			  </div>
+			  <div class="expanded-gift open font-fix">
+				<div class="title">Получите подарок!</div>
+				<div class="description">Выбирайте то, что нравится именно вам – а мы подарим</div>
+				<div class="gift-toggle">
+				  <svg viewBox="0 0 66.037 66.9657">
+					<svg viewBox="0 0 129 129" enable-background="new 0 0 129 129">
+					  <path d="M7.6,121.4c0.8,0.8,1.8,1.2,2.9,1.2s2.1-0.4,2.9-1.2l51.1-51.1l51.1,51.1c0.8,0.8,1.8,1.2,2.9,1.2c1,0,2.1-0.4,2.9-1.2   c1.6-1.6,1.6-4.2,0-5.8L70.3,64.5l51.1-51.1c1.6-1.6,1.6-4.2,0-5.8s-4.2-1.6-5.8,0L64.5,58.7L13.4,7.6C11.8,6,9.2,6,7.6,7.6   s-1.6,4.2,0,5.8l51.1,51.1L7.6,115.6C6,117.2,6,119.8,7.6,121.4z"></path>
+					</svg>
+				  </svg>
+				</div>
+				<div class="grade-cont">
+				  <div class="grade"></div>
+				  <div class="gifts-list">
+					<div class="gift-item limit3 not-animate">
+					  <div class="badge">
+						<svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"/></svg><span class="price">> 3 000<span class="currency">R</span></span>
+					  </div>
+						<a data-modal="gift-modal" href="#"
+						   class="get-gift md-trigger">Выбрать</a>
+					</div>
+					<div class="gift-item limit2 not-animate">
+					  <div class="badge">
+						<svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"/></svg><span class="price">> 2 000<span class="currency">R</span></span>
+					  </div>
+						<a data-modal="gift-modal" href="#"
+						   class="get-gift md-trigger">Выбрать</a>
+					</div>
+					<div class="gift-item limit1 not-animate">
+					  <div class="badge">
+						<svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"/></svg><span class="price">> 1 250<span class="currency">R</span></span>
+					  </div>
+						<a data-modal="gift-modal" href="#"
+						   class="get-gift md-trigger">Выбрать</a>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			
+				<div id="basket" class="bd-popup">
+				  <div class="information-col pull-xs-left">
+					<div style="display:none;" class="product-info-cont">
+					  <div class="constructor-view">
+						<div class="row">
+						  <div class="col-xs-4">
+							<div class="product-image"><img>
+							  <div class="close-view">
+								<svg viewBox="0 0 129 129"><path d="M7.6,121.4c0.8,0.8,1.8,1.2,2.9,1.2s2.1-0.4,2.9-1.2l51.1-51.1l51.1,51.1c0.8,0.8,1.8,1.2,2.9,1.2c1,0,2.1-0.4,2.9-1.2   c1.6-1.6,1.6-4.2,0-5.8L70.3,64.5l51.1-51.1c1.6-1.6,1.6-4.2,0-5.8s-4.2-1.6-5.8,0L64.5,58.7L13.4,7.6C11.8,6,9.2,6,7.6,7.6   s-1.6,4.2,0,5.8l51.1,51.1L7.6,115.6C6,117.2,6,119.8,7.6,121.4z"/></svg>
+							  </div>
+								<div class="apply-view">
+									<svg><path d="M54.04,48.75L50.106,53.2158H50.1044a0.9616,0.9616,0,0,1-.3215.2579v0.002a0.8512,0.8512,0,0,1-.7.0309,0.9307,0.9307,0,0,1-.2761-0.1678l-0.0017-.002-2.4466-2.3111a1.0781,1.0781,0,0,1-.3532-0.7056,1.1246,1.1246,0,0,1,.2041-0.7719h0a0.9164,0.9164,0,0,1,.06-0.0751l0.002-.0023a0.9131,0.9131,0,0,1,.5771-0.31,0.877,0.877,0,0,1,.6211.1655c0.0218,0.0156.0456,0.0349,0.0711,0.0573l1.7436,1.6948,3.3387-3.73c0.0116-.0142.0332-0.0374,0.0626-0.068a0.9059,0.9059,0,0,1,.5922-0.2792,0.8848,0.8848,0,0,1,.6137.2012l0.0008-.0017c0.0179,0.0147.0406,0.0352,0.0675,0.0612h0.0017a1.0961,1.0961,0,0,1,.3189.726,1.1129,1.1129,0,0,1-.2412.76L54.04,48.75h0Z" transform="translate(-42 -44)"></path></svg>
+								</div>
+							</div>
+						  </div>
+						  <div class="col-xs-8 nopad">
+							<div class="name"></div>
+						  </div>
+						</div>
+						<div class="constructor-scroll-content scrollbar-macosx">
+						  <div class="row description">
+							<div class="col-xs-12">
+							</div>
+						  </div>
+						  <div class="row constructor-content">
+							<div class="col-xs-12">
+							  <div class="property-label"> Основа</div>
+							  <div class="property-value base_value_"></div>
+							  <div class="property-label"> Соус</div>
+							  <div class="property-value souse_value_"></div>
+							  <div class="property-label"> Начинка</div>
+							  <div class="ingredients_list_">
+							  </div>
+							</div>
+						  </div>
+						</div>
+						<div style="display:none;" class="product-scroll-content">
+						  <div class="product-description"></div>
+						  <div class="product-options"></div>
+						</div>
+					  </div>
+					  <div class="likes">
+						<div class="like-content">
+						  <div class="like-icon"></div><span>5</span>
+						</div>
+					  </div>
+					</div>
+										<div class="basket-gift-container">
+					  <div class="progress-container in-progress">
+						<div class="progress-bar"></div>
+						<div class="progress-bar-content">
+						  <div>Если потратите еще</div>
+						  <div class="sum-to-gift"><span>0</span><span class="currency">R</span></div>
+						  <div>вы получите подарок</div>
+						</div>
+					  </div>
+					  <div class="progress-container progress-completed">
+						<div style="width: 100%;" class="progress-bar complete use"></div>
+						<div class="progress-bar-content"><a href="#" data-modal="gift-modal"
+															 class="btn-get-gift md-trigger" onclick="getGift()">Выбрать подарок</a>
+						</div>
+					  </div>
+					  <div class="progress-container progress-get-another">
+						<div style="width: 100%;" class="progress-bar complete reuse"></div>
+						<div class="progress-bar-content"><a href="#" data-modal="gift-modal"
+															 class="btn-get-gift another md-trigger">Выбрать другой</a>
+						</div>
+
+					  </div>
+					</div>
+										<div class="recommendation-container no-recommendation">
+					  <div class="text-content">
+						<div class="info-col-content">
+						   <div class="title">Быстро</div>
+<div class="text">Время доставки заказа от 45 минут</div>                        </div>
+						<div class="info-col-content">
+							<div class="title">Вкусно</div>
+<div class="text">Мы готовим только из свежих продуктов.</div>                        </div>
+						<div class="info-col-content">
+							<div class="title">Бесплатная доставка</div>
+<div class="text">Минимальная сумма заказа 500 рублей.</div>                        </div>
+					  </div>
+					  <footer>
+						<div class="phone">+7 (473) 229-58-54</div>
+						<div class="work-time">Доставка с 10.00 до 2.00</div>
+					  </footer>
+					</div>
+					<div class="recommendation-container recommendation-list">
+					  <div class="rc-list"></div>
+					  <ul class="rc-nav"></ul>
+					</div>
+					<div class="recommendation-container static-banner">
+					  <div class="text-content"></div>
+					</div>
+				  </div>
+				  <div class="basket-items-col pull-xs-right">
+					<div class="spinner"></div>
+					<div class="basket-title">Корзина</div>
+					<div class="products-list bd-scrollbar scrollbar-macosx" id="products-list"></div>
+					<div class="basket-actions">
+					  <div class="row">
+						<!--<div class="col-xs-4">
+						  <div class="bd-input">
+							<label class="text-xl-center">Промо-код</label>
+							<input type="text" class="basket-promo-code text-xs-left">
+						  </div>
+						  <a href="#" class="apply-code-btn">
+							<svg viewBox="0 0 25 25"><path d="M54.04,48.75L50.106,53.2158H50.1044a0.9616,0.9616,0,0,1-.3215.2579v0.002a0.8512,0.8512,0,0,1-.7.0309,0.9307,0.9307,0,0,1-.2761-0.1678l-0.0017-.002-2.4466-2.3111a1.0781,1.0781,0,0,1-.3532-0.7056,1.1246,1.1246,0,0,1,.2041-0.7719h0a0.9164,0.9164,0,0,1,.06-0.0751l0.002-.0023a0.9131,0.9131,0,0,1,.5771-0.31,0.877,0.877,0,0,1,.6211.1655c0.0218,0.0156.0456,0.0349,0.0711,0.0573l1.7436,1.6948,3.3387-3.73c0.0116-.0142.0332-0.0374,0.0626-0.068a0.9059,0.9059,0,0,1,.5922-0.2792,0.8848,0.8848,0,0,1,.6137.2012l0.0008-.0017c0.0179,0.0147.0406,0.0352,0.0675,0.0612h0.0017a1.0961,1.0961,0,0,1,.3189.726,1.1129,1.1129,0,0,1-.2412.76L54.04,48.75h0Z" transform="translate(-42 -44)"></path></svg>
+						  </a>
+						</div>-->
+						<div class="col-xs-4 order-total-container">
+						  <div class="order-total">
+							<div class="summary-label">Итого:</div>
+							<div class="order-sum font-fix"><span></span><span class="currency">R</span></div>
+							<div class="order-discount">Скидка <span></span>%</div>
+						  </div>
+						</div>
+						<div class="col-xs-4 bonuses-info text-xs-left">
+																			  Зарегистрируйтесь, чтобы <br />получать бонусные рубли                                                                            </div>
+					  </div>
+					  <a href="/checkout/" class="basket-checkout-btn">Оформить заказ</a>
+					  <div class="progress-container in-progress min-order-progress" data-min-order="500">
+						<div class="progress-bar"></div>
+						<div class="progress-bar-content">
+						  <div class="min-order-sum"><span>Минимальная сумма заказа </span><span>500</span><span class="currency">R</span></div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div> 
+<div id="bonuses-info" class="bd-popup">
+	<div class="col-xs-4">
+		<img src="assets/images/bonuses-popover-icon.png" alt="">
+	</div>
+	<div class="col-xs-8">
+		<div class="title">Получайте бонусные рубли с каждого заказа!</div>
+		<div class="description">Бонусными рублями можно полностью или частично оплатить заказ. <br /> Чтобы начать получать бонусы – вам необходимо зарегистрироваться!</div>
+	</div> 
+</div>
+
+<div id="auth" class="bd-popup {{if gt .UserID 0 }}is_auth {{ end }}">
+{{if gt .UserID 0 }}
+
+<div class="auth-state logged-in-state">
+			<div class="bonuses">
+				<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M442.491,241.824l-15.808-27.088c-2.08-3.564-6.655-4.766-10.22-2.687c-3.564,2.08-4.768,6.656-2.687,10.22l10.158,17.406
+			h-96.192l48.099-82.408l14.088,24.139c2.08,3.565,6.657,4.768,10.22,2.687c3.564-2.08,4.768-6.656,2.687-10.22l-19.712-33.777
+			c-1.845-3.161-5.266-5.126-8.927-5.126H137.804c-3.661,0-7.082,1.964-8.926,5.126L69.511,241.821
+			c-2.132,3.651-1.842,8.174,0.741,11.525l103.663,134.399c1.472,1.909,3.685,2.909,5.922,2.909c1.593,0,3.199-0.507,4.558-1.556
+			c3.268-2.52,3.873-7.213,1.353-10.481l-95.64-123.998h101.311l49.223,195.168l-26.057-33.784
+			c-2.519-3.266-7.213-3.873-10.481-1.352c-3.268,2.52-3.873,7.213-1.353,10.48l45.063,58.426c1.972,2.558,4.956,4.025,8.186,4.025
+			c3.23,0,6.213-1.467,8.185-4.024L441.75,253.345C444.332,249.995,444.622,245.472,442.491,241.824z M362.827,149.915
+			l-47.921,82.104l-46.136-82.104H362.827z M302.065,239.675h-92.13L256,157.696L302.065,239.675z M88.067,239.675l48.093-82.408
+			l48.099,82.408H88.067z M149.173,149.915h94.057l-46.136,82.104L149.173,149.915z M256,449.569l-49.168-194.95h98.336L256,449.569
+			z M271.358,449.789l49.223-195.169h101.311L271.358,449.789z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M256,24.418c-4.126,0-7.472,3.345-7.472,7.472v33.875c0,4.127,3.345,7.472,7.472,7.472s7.472-3.345,7.472-7.472V31.89
+			C263.472,27.763,260.126,24.418,256,24.418z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M437.019,82.794c-2.918-2.917-7.649-2.917-10.567,0l-23.953,23.952c-2.918,2.919-2.918,7.649,0,10.568
+			c1.459,1.458,3.371,2.188,5.283,2.188c1.912,0,3.825-0.73,5.284-2.188l23.953-23.952
+			C439.937,90.443,439.937,85.713,437.019,82.794z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M504.528,256.34h-33.875c-4.127,0-7.472,3.345-7.472,7.472s3.346,7.472,7.472,7.472h33.875
+			c4.127,0,7.472-3.345,7.472-7.472C512,259.685,508.654,256.34,504.528,256.34z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M41.347,256.34H7.472c-4.127,0-7.472,3.345-7.472,7.472s3.346,7.472,7.472,7.472h33.875c4.127,0,7.472-3.345,7.472-7.472
+			C48.819,259.685,45.474,256.34,41.347,256.34z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M109.502,106.746L85.548,82.793c-2.918-2.917-7.649-2.917-10.567,0c-2.918,2.919-2.918,7.649,0,10.568l23.953,23.953
+			c1.459,1.458,3.371,2.188,5.284,2.188c1.913,0,3.825-0.73,5.284-2.188C112.42,114.395,112.42,109.665,109.502,106.746z"/>
+	</g>
+</g>
+</svg>
+				<div class="title">Мои бонусы</div>
+				<div class="value"><span></span><span class="currency font-fix">R</span></div>
+			</div>
+			<nav>
+				<ul>
+					<li><a href="/my/#orders" onclick="hashlink()">История заказов</a></li>
+					<li><a href="/my/#bonuses" onclick="hashlink()">Бонусный счет</a></li>
+					<li><a href="/my/#profile" onclick="hashlink()">Личные данные</a></li>
+					<li><a class="go-to-love" href="/#like" onclick="hashlink()">Мои любимые</a></li>
+				</ul>
+			</nav>
+			<button onclick="window.location.href='?logout=yes'" class="exit-btn">Выйти</button>
+		</div>
+
+{{ else }} 
+								<div class="auth-tabs">
+				<ul>
+					<li class="active"><a  data-target="sign-in-email-state" href="#">Войти</a></li>
+					<li><a href="#" data-target="sign-up-email-state">Регистрация</a></li>
+				</ul>
+			</div>
+			<div class="auth-state sign-in-email-state">
+				<form id="sign-in-email-form">
+					<input type="hidden" name="CSRF" value=""/>
+					<input type="hidden" name="ACTION" value="LOGIN"/>
+					<input type="hidden" name="MODE" value="EMAIL"/>
+					<input type="hidden" name="Session" value="{{.Session}}" />
+					<div class="bd-form-row input-row-first">
+						<div class="bd-input">
+							<label>Электронная почта</label>
+							<input type="email" name="EMAIL">
+						</div>
+					</div>
+					<div class="bd-form-row input-row-last">
+						<div class="bd-input">
+							<label>Пароль</label>
+							<input type="password" name="PASSWORD">
+						</div>
+					</div>
+					<div class="bd-form-messages">
+						<div class="bd-error"></div>
+					</div>
+					<div class="bd-form-row actions">
+						<button type="submit" class="btn">Войти</button>
+					</div>
+					<div class="bd-form-row"><a href="#" class="forgot">
+							<span>Забыли пароль?</span></a></div>
+				</form>
+			</div>
+			<div class="auth-state sign-up-email-state">
+				<form id="sign-up-email-form">
+					<input type="hidden" name="CSRF" value=""/>
+					<input type="hidden" name="ACTION" value="REGISTER"/>
+					<input type="hidden" name="MODE" value="EMAIL"/>
+					<input type="hidden" name="Session" value="{{.Session}}" />
+					<div class="bd-form-row input-row-first">
+						<div class="bd-input">
+							<label>Электронная почта</label>
+							<input type="email" name="EMAIL">
+						</div>
+					</div>
+					<div class="bd-form-row input-row">
+						<div class="bd-input">
+							<label>Пароль</label>
+							<input type="password" name="PASSWORD">
+						</div>
+					</div>
+					<div class="bd-form-row input-row-last">
+						<div class="bd-input">
+							<label>Пароль еще раз</label>
+							<input type="password" name="PASSWORD2">
+						</div>
+					</div>
+					<div class="bd-form-row">
+						<div class="rules">
+							<label class="label">
+								<input type="checkbox" id="inp_agree">
+								<label for="inp_agree"><span></span></label><span>Я ознакомлен и согласен									
+								<a id="rules" class="md-trigger">с условиями использования и обработки моих персональных данных</a></span>
+							</label>
+						</div>
+					</div>
+					<div class="bd-form-messages">
+						<div class="bd-error"></div>
+					</div>
+					<div class="bd-form-row actions">
+						<button disabled="disabled" type="submit" class="btn">Зарегистрироваться</button>
+					</div>
+					
+				</form>
+			</div>
+						<div class="auth-state forgot-password-state">
+				<form>
+					<input type="hidden" name="CSRF" value=""/>
+					<input type="hidden" name="ACTION" value="RESET_PASSWORD"/>
+					<input type="hidden" name="MODE" value="EMAIL"/>
+					<input type="hidden" name="Session" value="{{.Session}}" />
+					<div class="bd-form-row">
+						<div class="bd-input bordered">
+							<label>Электронная почта</label>
+							<input type="text" name="EMAIL" class="phone">
+						</div>
+					</div>
+					<div class="bd-form-messages">
+						<div class="bd-error"></div>
+					</div>
+					<div class="bd-form-row actions">
+						<button type="submit" class="btn">Отправить код</button>
+					</div>
+				</form>
+				<div class="state-info">На указанную электронную почту в течении нескольких секунд придет 4-значный код.</div>
+			</div>
+			<div class="auth-state phone-confirm-password-state">
+				<form>
+					<input type="hidden" name="CSRF" value=""/>
+					<input type="hidden" name="ACTION" value="RESET_PASSWORD"/>
+					<input type="hidden" name="MODE" value="EMAIL"/>
+					<input type="hidden" name="EMAIL" value=""/>
+					<div class="bd-form-row">
+						<div class="bd-input bordered">
+							<label>Код подтверждения</label>
+							<input autocomplete="off" type="text" maxlength="4" name="REG_CONFIRM_CODE" class="phone">
+						</div>
+					</div>
+					<div class="bd-form-row actions">
+						<button type="submit" class="btn">Отправить код</button>
+					</div>
+				</form>
+
+			</div>
+			<div class="auth-state set-new-password-state">
+				<form>
+					<input type="hidden" name="CSRF" value=""/>
+					<input type="hidden" name="ACTION" value="RESET_PASSWORD"/>
+					<input type="hidden" name="MODE" value="EMAIL"/>
+					<input type="hidden" name="EMAIL" value=""/>
+					<div class="bd-form-row input-row-first">
+						<div class="bd-input">
+							<label>Пароль</label>
+							<input type="password" name="NEW_PASSWORD" class="phone">
+						</div>
+					</div>
+					<div class="bd-form-row input-row-last">
+						<div class="bd-input">
+							<label>Пароль еще раз</label>
+							<input  name="NEW_PASSWORD_2" type="password" class="phone">
+						</div>
+					</div>
+					<div class="bd-form-messages">
+						<div class="bd-error"></div>
+					</div>
+					<div class="bd-form-row actions">
+						<button type="submit" class="btn">Сменить пароль</button>
+					</div>
+				</form>
+			</div>
+{{ end }}
+	</div>
+
+<div class="webui-popover fade bottom-left fade-out" id="popover-ingridients-filter" style="top: 178px; left: 903px; display: none;">
+	<div class="webui-arrow" style="left: 353px;"></div>
+	<div class="webui-popover-inner">
+		<div class="webui-popover-content">
+			<div id="ingridients-filter" class="bd-popup" style="display: block;">
+				<form name="_form" action="/catalog/pitstsa/filter/clear/apply/" method="get" class="smartfilter">
+					<div class="scroll-wrapper row filter-params bd-scrollbar scrollbar-macosx font-fix" style="position: relative;">
+						<div class="row filter-params bd-scrollbar scrollbar-macosx font-fix scroll-content" style="height: 244px; margin-bottom: -14px; margin-right: -14px; max-height: none;">
+							<div class="col-xs-6 param-item">
+								<a href="#" class="icon-param remove-param selected">
+									<svg viewBox="0 0 489.307 489.307">
+										<g>
+											<polygon points="489.307,56.466 432.839,0 244.654,188.187 56.468,0 0,56.466 188.186,244.654 0,432.839 56.469,489.307 244.654,301.121 432.839,489.307 489.306,432.839 301.121,244.654"></polygon>
+										</g>
+									</svg>
+								</a>
+								<a href="#" class="icon-param add_param">
+									<svg viewBox="0 0 51.997 51.997">
+										<path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905 c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478 c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014 C52.216,18.553,51.97,16.611,51.911,16.242z M15.999,9.904c-4.411,0-8,3.589-8,8c0,0.553-0.447,1-1,1s-1-0.447-1-1 c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1S16.551,9.904,15.999,9.904z"></path>
+									</svg>
+									<span class="">Бекон</span>
+								</a>
+								<input type="hidden" value="N" name="arrFilter_13_3835189568" id="arrFilter_13_3835189568">
+							</div>
+							<div class="col-xs-6 param-item">
+								<a href="#" class="icon-param remove-param ">
+									<svg viewBox="0 0 489.307 489.307">
+										<g>
+											<polygon points="489.307,56.466 432.839,0 244.654,188.187 56.468,0 0,56.466 188.186,244.654 0,432.839 56.469,489.307 244.654,301.121 432.839,489.307 489.306,432.839 301.121,244.654"></polygon>
+										</g>
+									</svg>
+								</a>
+								<a href="#" class="icon-param add_param ">
+									<svg viewBox="0 0 51.997 51.997">
+										<path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905 c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478 c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014 C52.216,18.553,51.97,16.611,51.911,16.242z M15.999,9.904c-4.411,0-8,3.589-8,8c0,0.553-0.447,1-1,1s-1-0.447-1-1 c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1S16.551,9.904,15.999,9.904z"></path>
+									</svg>
+									<span>Кальмар</span>
+								</a>
+								<input type="hidden" value="N" name="arrFilter_13_1594496786" id="arrFilter_13_1594496786">
+							</div>
+							<div class="col-xs-6 param-item">
+								<a href="#" class="icon-param remove-param ">
+									<svg viewBox="0 0 489.307 489.307">
+										<g>
+											<polygon points="489.307,56.466 432.839,0 244.654,188.187 56.468,0 0,56.466 188.186,244.654 0,432.839 56.469,489.307 244.654,301.121 432.839,489.307 489.306,432.839 301.121,244.654"></polygon>
+										</g>
+									</svg>
+								</a>
+								<a href="#" class="icon-param add_param ">
+									<svg viewBox="0 0 51.997 51.997">
+										<path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905 c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478 c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014 C52.216,18.553,51.97,16.611,51.911,16.242z M15.999,9.904c-4.411,0-8,3.589-8,8c0,0.553-0.447,1-1,1s-1-0.447-1-1 c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1S16.551,9.904,15.999,9.904z"></path>
+									</svg>
+									<span>Креветка</span>
+								</a>
+								<input type="hidden" value="N" name="arrFilter_13_671950724" id="arrFilter_13_671950724">
+							</div>
+							<div class="col-xs-6 param-item">
+								<a href="#" class="icon-param remove-param ">
+									<svg viewBox="0 0 489.307 489.307">
+										<g>
+											<polygon points="489.307,56.466 432.839,0 244.654,188.187 56.468,0 0,56.466 188.186,244.654 0,432.839 56.469,489.307 244.654,301.121 432.839,489.307 489.306,432.839 301.121,244.654"></polygon>
+										</g>
+									</svg>
+								</a>
+								<a href="#" class="icon-param add_param ">
+									<svg viewBox="0 0 51.997 51.997">
+										<path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905 c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478 c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014 C52.216,18.553,51.97,16.611,51.911,16.242z M15.999,9.904c-4.411,0-8,3.589-8,8c0,0.553-0.447,1-1,1s-1-0.447-1-1 c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1S16.551,9.904,15.999,9.904z"></path>
+									</svg>
+									<span>Мидии</span>
+								</a>
+								<input type="hidden" value="N" name="arrFilter_13_328010029" id="arrFilter_13_328010029">
+							</div>
+						</div>
+						<div class="scroll-element scroll-x">
+							<div class="scroll-element_outer">
+								<div class="scroll-element_size"></div>
+								<div class="scroll-element_track"></div>
+								<div class="scroll-bar" style="width: 0px;"></div>
+							</div>
+						</div>
+						<div class="scroll-element scroll-y">
+							<div class="scroll-element_outer">
+								<div class="scroll-element_size"></div>
+								<div class="scroll-element_track"></div>
+								<div class="scroll-bar" style="height: 0px;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row filter-actions">
+						<button type="button" id="set_filter" name="set_filter" class="apply-filter bx_filter_search_button" value="Применить">Применить</button>
+						<button type="button" id="del_filter" name="del_filter" class="clear-filter bx_filter_search_reset">Сбросить фильтр</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="global-overlay" class="md-overlay"></div>
+<div class="md-modal md-effect-1" id="callback-modal">
+	<a class="modal-btn-close" href="#">✕</a>
+	<div class="md-content text-center">
+		<h3>Обратный звонок</h3>
+		<div>
+			<p>Представьтесь, мы Вам перезвоним.</p>
+			<form id="callback-form" method="post" action="/">
+				<input type="hidden" name="mailto" value="webdevep28@gmail.com">
+				<input type="hidden" name="target" value="Mainpage-header callback-form">
+				<input type="hidden" name="subject" value="Заказ обратного звонка с сайта Антисуши">
+				<input type="text" name="name" placeholder="ФИО" value="">
+				<input type="text" name="phone" placeholder="+7 (4732) xx xx xx " value="">
+				<input type="checkbox" name="agreement"><label for="agreement">Я согласен на обработку персональных данных</label>
+				<button type="submit" disabled class="">Заказать</button>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="md-modal md-effect-1" id="thanks-modal">
+	<a class="modal-btn-close" href="#">✕</a>
+	<div class="md-content text-center">
+		<h3>Информация</h3>
+		<div class="md-content-message">
+		</div>
+		<a class="btn modal-big-btn-close">Закрыть</a>
+	</div>
+</div>
+
+<div id="rules-modal" class="modal fade">
+	<div class="modal-dialog">
+	<div class="md-content">
+	<div class="modal-header">
+		<div class="modal-title">Согласие на обработку персональных данных</div>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+		</div>
+		<div class="modal-body">
+		<div class="rules-text-cont scrollbar-macosx">
+			<noindex>
+Настоящим я, далее – «Субъект Персональных Данных», во исполнение требований Федерального закона от 27.07.2006 г. № 152-ФЗ «О персональных данных» (с изменениями и дополнениями) свободно, своей волей и в своем интересе даю свое согласие ООО «Вкусно Сытно Быстро» (далее – «Доставка», юридический адрес:  394077, г. Воронеж, г. Воронеж, ул. Шишкова, дом № 107/1, корп. 6) на обработку своих персональных данных, указанных при регистрации путем заполнения веб-формы на сайте «Доставка» anti-sushi.ru:443 и его поддоменов *.anti-sushi.ru:443 (далее – Сайт), направляемой (заполненной) с использованием Сайта.<br /><br />Под персональными данными я понимаю любую информацию, относящуюся ко мне как к Субъекту Персональных Данных, в том числе мои фамилию, имя, отчество, адрес, контактные данные (телефон, электронная почта, почтовый адрес), фотографии,  иную другую информацию. Под обработкой персональных данных я понимаю сбор, систематизацию, накопление, уточнение, обновление, изменение, использование, распространение, передачу, в том числе трансграничную, обезличивание, блокирование, уничтожение, бессрочное хранение), и любые другие действия (операции) с персональными данными.<br /><br />Обработка персональных данных Субъекта Персональных Данных осуществляется исключительно в целях регистрации Субъекта Персональных Данных в базе данных «Доставка» с последующим направлением Субъекту Персональных Данных почтовых сообщений и смс-уведомлений, в том числе рекламного содержания, от «Доставка», его аффилированных лиц  и/или субподрядчиков, информационных и новостных рассылок и другой информации рекламно-новостного содержания.<br /><br />Датой выдачи согласия на обработку персональных данных Субъекта Персональных Данных является дата отправки регистрационной веб-формы с Сайта «Доставка».<br /><br />Обработка персональных данных Субъекта Персональных Данных может осуществляться с помощью средств автоматизации и/или без использования средств автоматизации в соответствии с действующим законодательством РФ и внутренними положениями «Доставка».<br /><br />«Доставка» принимает необходимые правовые, организационные и технические меры или обеспечивает их принятие для защиты персональных данных от неправомерного или случайного доступа к ним, уничтожения, изменения, блокирования, копирования, предоставления, распространения персональных данных, а также от иных неправомерных действий в отношении персональных данных, а также принимает на себя обязательство сохранения конфиденциальности персональных данных Субъекта Персональных Данных. «Доставка» вправе привлекать для обработки персональных данных Субъекта Персональных Данных субподрядчиков, а также вправе передавать персональные данные для обработки своим аффилированным лицам, обеспечивая при этом принятие такими субподрядчиками и аффилированными лицами соответствующих обязательств в части конфиденциальности персональных данных.<br /><br />Я ознакомлен(а), что:<br /><br />
+• настоящее согласие на обработку моих персональных данных, указанных при регистрации на Сайте «Доставка», направляемых (заполненных) с использованием Cайта, действует в течение 20 (двадцати) лет с момента регистрации на Cайте «Доставка»;<br />
+• согласие может быть отозвано мною на основании письменного заявления в произвольной форме;<br />
+• предоставление персональных данных третьих лиц без их согласия влечет ответственность в соответствии с действующим законодательством Российской Федерации.<br />			</noindex>
+		</div>
+		</div>
+	</div>
+</div>
+		<div class="md-overlay"></div>
+	  </div>
+	  
+<div class="modal fade" id="cookie-modal">
+  <div class="modal-dialog">
+	<div class="md-content">
+	  <div class="modal-header">
+		<div class="modal-title">Наш сайт использует cookie. Если вы хотите воспользоваться функционалом нашего интернет-магазина пожалуйста включитe cookie в вашем браузере. В противном случае вы можете сделать заказ по телефону +7 (473) 229-58-54 </div>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	</div>
+  </div>
+  <div class="md-overlay"></div>
+</div>
+
+<div id="gift-modal" class="modal fade">
+			<!--<div class="modal-dialog">-->
+			<div class="md-content">
+			<div class="modal-title">Выберите подарок</div>
+			<div class="gift-container">
+			<div class="row">
+				{{ range GetGiftList }}
+					<div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-xs-12" id="{{ .ID }}"
+					data-id="{{ .ID }}">
+					  <div  data-id="{{ .ID }}" class="product gift">
+						<div class="mask"></div>
+						<div class="back-side">
+						  <div class="stars"></div>
+						  <div class="gift-in-basket-text font-fix">
+							  <div>Подарок</div>
+							  <div>В корзине</div>
+						  </div>
+						  <button class="get-another-gift-btn font-fix">Выбрать другой</button>
+						</div>
+						<div class="front-side">
+						  <div class="preview">
+							  <picture>
+								  <source srcset="{{ .PicUri }}" media="(max-width: 554px)">
+								  <source srcset="{{ .PicUri }}" media="(max-width: 768px)">
+								  <source srcset="{{ .PicUri }}" media="(max-width: 992px)">
+								  <source srcset="{{ .PicUri }}" media="(max-width: 2000px)">
+								  <img
+									  srcset="{{ .PicUri }}"
+									  alt="{{ .Name }}"
+									  title="{{ .Name }}"
+									  class="product-image"
+								  />
+							  </picture>
+						  </div>
+						  <div class="product-info"><span class="product-title font-fix">{{ .Name }}</span>
+							<div class="product-description">{{ .Name }}</div>
+						  </div>
+							<div class="gift-progress-info" data-limit="{{ .Threshold }}">
+								<div class="progress-container">
+									<div class="progress-bar"></div>
+									<div class="progress-bar-content">
+										<div class="native_text">native
+											<span class="currency">R</span></div>
+										<div class="hover_text">hover<span class="font-fix"><span class="gift-progress-value">gift progress</span><span
+													class="currency">R</span></span></div>
+									</div>
+								</div>
+							</div>  
+						  <button class="get-gift-btn" >Выбрать</button> 
+						</div>
+					  </div>
+					</div>
+				{{ end }}
+			</div>
+			</div>		
+		</div>
+		<!--</div>-->
+		<div class="md-overlay"></div>
+</div>	
+	  
+
+
+<!-- filter -->
+<!--
+<a href="#" data-id="ingridients-filter" data-handler="popover" class="ingridients-filter-btn <?php if(!empty(${$FILTER_NAME})): ?>active<?php endif; ?>">
+				<svg viewBox="0 0 51.997 51.997">
+				  <path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905 c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478 c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014 C52.216,18.553,51.97,16.611,51.911,16.242z M15.999,9.904c-4.411,0-8,3.589-8,8c0,0.553-0.447,1-1,1s-1-0.447-1-1 c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1S16.551,9.904,15.999,9.904z"></path>
+				</svg><span><?=GetMessage("filter");?></span></a>
+				<?php if(!empty(${$FILTER_NAME})):?>
+				<a href="<?php echo $arResult["JS_FILTER_PARAMS"]['SEF_DEL_FILTER_URL']; ?>" class="clear-filter-btn"><span><?=GetMessage("clear_filter");?></span></a>
+				<?php endif; ?>
+
+<div id="ingridients-filter" class="bd-popup">
+	<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="smartfilter">
+				<div class="row filter-params bd-scrollbar scrollbar-macosx font-fix">
+
+				 <?php foreach ($arResult["ITEMS"] as $key=>$val): ?>
+					 <?php  if($val['CODE']=='INGREDIENTS'): ?>
+						 <?php foreach ($val['VALUES'] as $val=>$ar):?>
+							<?php if(!empty($ar["VALUE"])):?>
+								<div class="col-xs-6 param-item"><a href="#" class="icon-param remove-param <? echo $ar["EXCLUDE"]? 'selected': '' ?>">
+							  <svg viewBox="0 0 489.307 489.307">
+								<g>
+								  <polygon points="489.307,56.466 432.839,0 244.654,188.187 56.468,0 0,56.466 188.186,244.654 0,432.839 56.469,489.307 244.654,301.121 432.839,489.307 489.306,432.839 301.121,244.654"></polygon>
+								</g>
+							  </svg></a><a href="#" class="icon-param add_param <? echo $ar["CHECKED"]? 'selected': '' ?>">
+							  <svg viewBox="0 0 51.997 51.997">
+								<path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905 c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478 c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014 C52.216,18.553,51.97,16.611,51.911,16.242z M15.999,9.904c-4.411,0-8,3.589-8,8c0,0.553-0.447,1-1,1s-1-0.447-1-1 c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1S16.551,9.904,15.999,9.904z"></path>
+							  </svg><span <? echo $ar["EXCLUDE"]? 'class="unchecked"': '' ?>><?=$ar["VALUE"];?></span></a>
+									<?php
+									$val = 'N';
+									if($ar["EXCLUDE"]){
+										$val = 'E';
+									}
+									if($ar["CHECKED"]){
+										$val = 'Y';
+									}
+									?>
+								<input
+									type="hidden"
+									value="<?php echo $val; ?>"
+									name="<? echo $ar["CONTROL_NAME"] ?>"
+									id="<? echo $ar["CONTROL_ID"] ?>"
+									<? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
+								/>
+						  </div>
+							 <?php endif; ?>
+						 <?php endforeach; ?>
+					<?php endif; ?>
+				 <?php endforeach; ?>
+
+				</div>
+				<div class="row filter-actions">
+				  <button type="submit" id="set_filter" name="set_filter" class="apply-filter bx_filter_search_button" value="<?=GetMessage("apply_filter");?>"><?=GetMessage("apply_filter");?></button>
+				  <button  type="submit" id="del_filter" name="del_filter" class="clear-filter bx_filter_search_reset"><?=GetMessage("clear_filter");?></button>
+				</div>
+	</form>
+			  </div>
+<script>
+	var smartFilter = new JCSmartFilter('<?echo CUtil::JSEscape($arResult["FORM_ACTION"])?>','', <?=CUtil::PhpToJSObject($arResult["JS_FILTER_PARAMS"])?>);
+</script>
+-->
+
+				<!--- U CAN INCLUDE TO THIS FILE ANYTHING WHAT U WANT --->        
+<!--				<div class="outer-form">
+			<div class="form popup">
+				<span class="popup-close" for="modal">✕</span>
+				<div class="inner-form">
+					<form name="callback-form" action="/ajax/callback-form.php" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+	<input type="hidden" name="form-name" value="callback-form">
+	<div class="form-header">
+		<div class="text">
+			<div class="title">Обратный звонок</div>
+			Представьтесь, мы Вам перезвоним.
+		</div>
+	</div>
+	<div class="form-body">
+		<div class="row" data-sid="FIO">
+			<div class="col-md-12">
+				<div class="form-group animated-labels">
+					<label for="POPUP_FIO">
+						Ваше имя: <span class="required-star">*</span>                    </label>
+					<div class="input">
+												<input type="text" id="POPUP_FIO" name="FIO" class="form-control required" >
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" data-sid="PHONE">
+			<div class="col-md-12">
+				<div class="form-group animated-labels">
+					<label for="POPUP_PHONE">
+						Телефон: <span class="required-star">*</span>                    </label>
+					<div class="input">
+												<input type="text" id="POPUP_PHONE" name="PHONE" class="form-control required" >
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-footer clearfix">
+					<div class="licence_block bx_filter">
+								<input type="checkbox" id="licenses_popup" name="licenses_popup" required value="Y" >
+				<label for="licenses_popup">Я согласен на <a href="#" target="_blank">обработку персональных данных</a></label>
+			</div>
+				<div>
+			<button class="btn-lg btn btn-default" type="submit" >Отправить</button>
+			<br>
+			<input type="hidden" name="form_submit" value="Отправить">
+		</div>
+	</div>
+</form>                </div>
+			</div>
+		</div> 
+		-->
+		<div class="modal-overlay">
+	<div class="modal-content">
+		<span class="modal-close" for="modal">&#10005;</span>
+		<h2>Дорогой клиент!</h2>
+<p>Мы любим и дорожим каждым из вас. За эти годы наша команда выросла, превратившись в независимую полноценную 
+компанию по доставке удовольствий настоящим гурманам. Ей стало тесно в неповоротливой и порой закостенелой франшизе. <br> <br>
+
+Наша команда переросла Фарфор! И мы приняли решение отделиться. В новом формате мы учтём все недочеты и ошибки как наши, так франшизы в целом. <br> <br>
+
+Новое меню, новые рецепты, бонусы, и главное - цены, которые приятно порадуют вас. Мы уверены, что в новом формате наша компания не разочарует вас! <br> <br>
+
+И как и прежде, мы будем готовы доставить вам ваши любимые блюда ВКУСНО СЫТНО БЫСТРО. <br> <br>
+
+Будем рады, если вы напишите Ваши пожелания и замечания на e-mail vrn@anti-sushi.ru!
+</p>
+<div class="modal-content-button">ОК</div>    </div>
+</div>
+<style type="text/css">
+	.modal-content h2{
+		text-align: center;
+	}
+	.modal-overlay{
+		z-index: 99999;
+		position: fixed;
+		display: none;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.modal-content{
+		position: fixed;
+		display: none;
+		top: 20%;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 50%;
+		height: auto;
+		padding: 40px;
+		background-color: white;
+		border-radius: 3px;
+		pointer-events: auto;
+		cursor: auto;
+		transition: transform 500ms;
+		box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.4);
+	}
+
+
+	.modal-close{
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		font-size: 22px;
+		color: transparentize(#333,0.6);
+		transition: color 200ms,
+		transform 500ms;
+		cursor: pointer;
+	}
+	.modal-close:hover,
+	.modal-close:focus{
+		color: #333;
+		transform: rotate(360deg);
+	}
+
+	.modal-content p{
+		position: relative;
+		margin: 0 0 20px 0;
+		font-weight: 200;
+		font-size: 14px;
+		line-height: 1.6;
+	}
+
+	.modal-content-button{
+		position: relative;
+		float: right;
+		margin: 0;
+		padding: 10px 20px;
+		color: white;
+		font-weight: 100;
+		border-radius: 3px;
+		background-color: #2980b9;
+		cursor: pointer;
+	}
+	.modal-content-button:hover,
+	.modal-content-button:focus{
+		background-color: lighten(#2980b9,10%);
+	}
+
+	@media (max-width: 900px){
+		.modal-content {
+			top: 0;
+			bottom: 0;
+			width: 100%;
+			height: auto;
+		}
+	}
+</style>
+
+
+<!--
+<script type="text/javascript">
+	  window.limit1 = 1250;
+	  window.limit2 = 2000;
+	  window.limit3 = 3000;
+  </script>-->
+<!--<script type="text/javascript">var ga;</script>-->
+<script>var MODAL_ON = false;</script>
+<script>
+{{$Basket := GetBasket .Session }};
+if ({{$Basket.TotalPrice}} > 0) {
+	animateNumbers($('.not-empty-basket').find('.basket-sum span').first(),{{$Basket.TotalPrice}});
+	$(".not-empty-basket").show();
+	$(".empty-basket").hide();	
+};
+console.log({{$Basket}});
+calcGifts({{$Basket.GiftPrice}});
+</script>
+<!--<script type="text/javascript" src="/assets/js/script.js"></script>-->
+
+{{ end }}
+
+{{ end }}
