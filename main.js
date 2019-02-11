@@ -176,17 +176,15 @@ $(document).ready(function () {
 
 		$.ajax({
 				url: '/assets/script/ajax.php',
-				type:'HEAD',
 				type: 'post',
 				dataType : "json",
-				cache: false,	
-				data: 'json_data='+json_data,
-				error: function(){  },
-				success: function(){ 
+				cache: false,
+				data: { 'name':$('#callback-form [name="name"]').val(),'phone':$('#callback-form [name="name"]').val(),'session':Session },
+				success: function (data) { 
 					$('#callback-form input').each(function() { $(this.val('')); });
 					$('#callback-form [name="agreement"]').prop('checked',false);
 					$('#callback-form').removeClass('md-show');
-					$('#thanks-form .md-content-message').html('Сообщенеи успешно отправлено');
+					$('#thanks-form .md-content-message').html(data);
 					$('#thanks-form').addClass('md-show');
 				}
 		});
