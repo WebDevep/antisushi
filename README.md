@@ -4,6 +4,7 @@ anti-sushi.ru
 * Добавлена отмена всех модалок по нажатию клавищи ESC
 
 Обатный звонок
+
 1. Данные отправляются аяксом на серверный скрипт /aseets/json.php
 2. Данные отправляются в виде json-строки. Пример:
 [{"name":"mailto","value":"webdevep28@gmail.com"},{"name":"target","value":"Mainpage-header callback-form"},{"name":"subject","value":"Заказ обратного звонка с сайта Антисуши"},{"name":"name","value":"Игорь Александров"},{"name":"phone","value":"+7(123) 456-78-94"},{"name":"agreement","value":""}]
@@ -33,6 +34,7 @@ anti-sushi.ru
 ?>"
 
 Фильтры
+
 Грузятся в зависимости от текущего URL:
 "Функция addFilter (title, id) - создаёт объект фильтра с указанным ID.
 Все ID я взял со старого сайта.
