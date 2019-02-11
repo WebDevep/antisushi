@@ -1,0 +1,2 @@
+# antisushi
+anti-sushi.ru
