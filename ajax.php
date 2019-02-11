@@ -4,6 +4,11 @@
 	if (isset($_POST['phone'])) $data['phone']= $_OIST['phone']; else $data['phone']= 'неизвестно';
 	if (isset($_POST['session'])) $data['session']= $_OIST['session']; else $data['session']= 'неизвестно';
 	if (isset($_POST['mailtp'])) $data['mailtp']= $_OIST['mailtp']; else $data['mailtp']= '';
+	if ($data['session'] {
+		session_id($_POST['session']);
+ 		session_start();
+		// ...
+	}
 	if ($data['mailto']) {
 		$to = $data['mailto'];
 		$subject = 'Заказ обратного звонка';
