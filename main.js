@@ -1466,9 +1466,16 @@ function renderSummary(data){
 	calcGifts(data.GiftPrice);
 }
 
+
 function getGift() {
 		$('#popover-basket').hide();
+		if ($('.modal-backdrop').length <= 0) {
+			$('.modal-backdrop').addClass('show')
+		} else {
+			$('body').append('<div class="modal-backdrop fade show"></div>');
+		}
 		$('#gift-modal').modal();
+		$('#gift-modal').addClass('show');
 		//$('#gift-modal .md-content').show();
 		//$('#gift-modal').on('click',function(e){
 		//	e.preventDefault();
