@@ -1849,6 +1849,19 @@ function checkoutbasket(data){
 };	
 
 $(document).ready(function(){
+	var $form = $('#checkout-form');
+	var $basket_item = $('.basket-item .change-person-btn').closest('.basket-item');
+	$.ajax({
+		type: 'post',
+		data: $form.serialize(),
+		dataType: "json",
+		url: '/bd/checkout/?validatedelivery',
+		success: function(data){
+			console.log(data);
+				$basket_item.find('.buttons').find('input[type="hidden"]').val(data.PersonCount);
+				$basket_item.find('.buttons').find('.personamount').text(data.PersonCount)
+		}
+	});	
 	$('.basket-item .change-person-btn').on('click',function(e){
 		e.preventDefault();
 		var $basket_item = $(this).closest('.basket-item');
