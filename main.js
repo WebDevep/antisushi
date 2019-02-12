@@ -1873,7 +1873,7 @@ $(document).ready(function(){
 			$basket_item.find('.buttons').find('.personamount').text(new_val)
 		}else{
 			new_val--
-			if(new_val==0){
+			if(new_val<=0){
 			new_val = 1;
 		}
 			$basket_item.find('.buttons').find('input[type="hidden"]').val(new_val);
