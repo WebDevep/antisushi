@@ -1868,6 +1868,7 @@ $(document).ready(function(){
 		var current_val = $basket_item.find('.buttons').find('input[type="hidden"]').val();
 		var new_val = parseInt(current_val);
 		if($(this).hasClass('plus')){
+			if (new_val < 1) new_val= 1;
 			new_val++
 			$basket_item.find('.buttons').find('input[type="hidden"]').val(new_val);
 			$basket_item.find('.buttons').find('.personamount').text(new_val)
