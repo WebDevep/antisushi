@@ -14903,6 +14903,11 @@ p.composition__item__detail {
 	top: -1px;
 	overflow: hidden;
 }
+
+.bd-select .sod_select::before {
+    top: 18px;
+}
+
 /*.gift-progress-info .progress-container .native_text, .gift-progress-info .progress-container .hover_text { color: transparent; }*/
 
 @media screen and (max-width: 479px) {
