@@ -34,6 +34,24 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
 }
 
 $(document).ready(function () {
+	$('#callback-form input[name="agreement"]').wrap('<span class="modern-checkbox"></span>');
+	$('#callback-form .modern-checkbox').append('<span class="checkbox"></span>');
+
+	$('body').on('click','#callback-form .modern-checkbox .checkbox',function(e) {
+		$(this).toggleClass('active');
+		if ($(this).hasClass('active')) {
+			$(this).parent().find('input[type="checkbox"]').prop('checked',true);
+		} else {
+			$(this).parent().find('input[type="checkbox"]').prop('checked',false);
+		}
+	});
+
+	$('body').on('click','#callback-form label[for="agreement"] .modern-checkbox .checkbox',function(e) {
+		if (($('#callback-form input[name="name"]').val().length > 1) && ($('#callback-form input[name="phone"]').val().length > 16) && ($('#callback-form [name="agreement"]').is(':checked')))
+			$('#callback-form [type="submit"]').prop('disabled', false);
+		else
+			$('#callback-form [type="submit"]').prop('disabled', true);		
+	});
 
 	if ($('.not-empty-basket .basket-sum > span').length > 0)
 		if ($('.not-empty-basket .basket-sum > span').html() != '') {
@@ -206,7 +224,7 @@ $(document).ready(function () {
 	})
 	$('#callback-form').on('submit',function(e) {
 		e.preventDefault();
-		json_data= {"name":"'+$('#callback-form [name="name"]').val()+'","phone":"'+$('#callback-form [name="phpne"]').val()+'","session":"'+Session+'"};
+		json_data= jQuery.parseJSON ('{"name":"'+$('#callback-form [name="name"]').val()+'","phone":"'+$('#callback-form [name="phpne"]').val()+'","session":"'+Session+'"}');		
 		console.log(json_data);
 
 		$.ajax({
@@ -1863,8 +1881,8 @@ function getcheckoutbasket(){
 	  url: '/bd/basket/?getBasket',
 	  data: { 'Session':Session },
 	  success: function(data) {
-	  	// checkoutbasket(data);
-	  	if (data['BasketPrice']) {
+		// checkoutbasket(data);
+		if (data['BasketPrice']) {
 			if ($('.not-empty-basket .basket-sum > svg').length <= 0) $('.not-empty-basket').append('<svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg>');
 			if ($('.not-empty-basket .basket-sum').length <= 0) $('.not-empty-basket').append('<span class="basket-sum"><span>'+data['BasketPrice']+'</span></span>');
 			if ($('.not-empty-basket .basket-sum > span').length > 0)
@@ -1872,7 +1890,7 @@ function getcheckoutbasket(){
 					$('.not-empty-basket').css('display','block');
 				}
 		}		
-	  	console.log(data)
+		console.log(data)
 	  }
 	});
 };
