@@ -1,0 +1,191 @@
+{{ define "index" }}
+
+{{ template "header" . }}
+<body class="  index-page fixed-header">
+{{ template "menu" . }} 
+</header>
+
+{{ if .IsMobile }}
+
+<div class="content auth-content" style="display: none;">
+	<div class="status-bar auth-status-bar"><a href="#" class="back"></a>
+		<div class="title"></div>
+		<div class="auth-tabs">
+			<ul>
+				<li data-target="sign-in" class="active"><a href="#">Войти</a></li>
+				<li data-target="sign-up"><a href="#">Регистрация</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="auth">
+		<div class="auth-state sign-in-email-state">
+			<form id="sign-in-email-form">
+				<input type="hidden" name="CSRF" value=""/>
+				<input type="hidden" name="ACTION" value="LOGIN"/>
+				<input type="hidden" name="MODE" value="EMAIL"/>
+				<input type="hidden" name="Session" value="{{.Session}}" />
+				<div class="bd-input">
+					<input type="email" name="EMAIL" placeholder="Элекронная почта" />
+				</div>
+				<div class="bd-input">
+					<input type="password" name="PASSWORD" placeholder="Пароль" />
+				</div>
+				<div class="auth-info">
+					<div class="auth-btn-cont">
+						<button type="submit" class="auth-btn">Войти</button>
+					</div>
+					<div class="info-text error-text bd-error"></div>
+					<div class="pass-reminder"><a onclick="setAuthState('forgot-password-state')" href="#">Забыли пароль?</a></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div id="page">
+<div class="content">
+<div class="slider-container">
+	<div class="spinner"></div>
+	     <div class="bd-slider carousel">
+		     	{{range GetMenuList 3}}
+					<div class="carousel-cell"><a href="{{ .Uri}}"><img class="carousel-cell-image" src="{{ .PicUri}}"></a></div>
+				{{end}} 	  
+        </div>
+		</div>
+
+<div class="phonetext" >
+	<div class="phone2">
+	<img class="delivphoneimage" src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAhCAIAAABbQmwDAAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAACxMAAAsTAQCanBgAAAcraVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE4IChXaW5kb3dzKSIgeG1wOkNyZWF0ZURhdGU9IjIwMTgtMTAtMjVUMjA6NDY6NDMrMDM6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTgtMTAtMjVUMjA6NDY6NDMrMDM6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDE4LTEwLTI1VDIwOjQ2OjQzKzAzOjAwIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFiZTNjNTExLWU2ZGMtYjc0MS05NmVkLWQ3YTU5NGE2M2ZjMCIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjExYjg4YzA5LTMxZjMtZGQ0Ny05ZTgyLTYxMzNjZDA0YmMyOCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOmQ3YmUwMzQ2LTQxNWQtM2U0MS05MjI5LWViZjkzODBlMTczZCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmQ3YmUwMzQ2LTQxNWQtM2U0MS05MjI5LWViZjkzODBlMTczZCIgc3RFdnQ6d2hlbj0iMjAxOC0xMC0yNVQyMDo0Njo0MyswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDoxYmUzYzUxMS1lNmRjLWI3NDEtOTZlZC1kN2E1OTRhNjNmYzAiIHN0RXZ0OndoZW49IjIwMTgtMTAtMjVUMjA6NDY6NDMrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE4IChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+NEE3MzY1RkIwRDkyMjgyNkRCNzY0QzEwMDlFOTE5ODM8L3JkZjpsaT4gPHJkZjpsaT5hZG9iZTpkb2NpZDpwaG90b3Nob3A6MTkyNTk3YWQtZDVhZi1mMDQyLWIxOGItZGY0ODBjYTc4ZmM4PC9yZGY6bGk+IDxyZGY6bGk+YWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmNhYmM5Y2NjLWM3MmEtMTFlOC04M2U2LTgyZjViMzFhM2MzMTwvcmRmOmxpPiA8cmRmOmxpPnhtcC5kaWQ6YTBjNDIxMDYtNDZlOC1mMDQxLWEyYTEtZDlmYTI2MjEyZTc2PC9yZGY6bGk+IDwvcmRmOkJhZz4gPC9waG90b3Nob3A6RG9jdW1lbnRBbmNlc3RvcnM+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+27tnUgAAAwFJREFUOI2FlM9L22AYx98faZq08edmN9s5K/5Cth3qFCmi6MH1UmQ38R/wIOJhDMSx0zz4Twgig12Gp8EYHoSBMmHTKlOqm7PWzWottl3TxuRNmneHtLZGF7+39+H7yfN9nzwJpJSCq1JkWcpm48fHhBBss3lbWniHAyFU7mHKD3+Tye+bm5+Xl7+FQns7OzaMVV3v7+/v7evLJBLDo6MNXm/BSotSTk5mJyerBQECszBCHISDXV1/olHDXMQIeTsxwVxNcl3vFxYMe8EXXV5+OT+v6boFw0AoX1yUQkqZzJvxces+AABPbe3RwUEpZCwafdTRcSsWHBiQstlSSFWWVUm6FXs2NMRyXCEwACAejx+enJhMTo5TCIEAUEoZhDiG8fn9GOMCput6OBwmhJQzFYIwMzX11Of7uLS0sbERDAQed3d3+/1U16ExbaIos9PTplYsxl9XViiliqIcFsdQLqQoSiKRMGGVTqeRh2XZxqam6/dElNLjWMyMVVVV1dRYjAcpspw6OzNVeZZNp1JWmCAIGVU1VbOSdHG5EDdiKiG/o1FT1c6yfPEV3YylkkmHw2GqEkIk625KLpdJp80hRVHKZKwwLZ93VFaaqpqmiaJohXm8Xp5hTFWiqsnzcyuMYRhZls3dKOXtdissK4ouj8dUxRiniiGv/6MAAIxDEFobGta2tq6E1LQPi4tPfD4xnYYQZtLp4ZERoaKi5JByuRdjY6aHQQCqOe5ebW2F3W7D2InQ68lJPZ+/XGWQ17R3c3MW1zD00O3eWV8vfQEI49b29us/OZOOYrHdtbXLIwIA2Hm+hudvbRgKhbTizBEA4L7H8zwYBPCWlp9WV3/u75ewOy5Xb18fc9OgyxWORFLJZOFgXDERj4+NjtosG3a1tcUih4a/sFZ3Xa5XMzN11dW/Tk/D29s/IhGKsawojY2NCKG25ub+zs7BQKDOXW/4YfkS5DUtcXaGcrndvb0vm5sahD09PfX19Q/cbo7n7WVfILxxdwAAqqoyDAP/E/sf3AWbfVL45IgAAAAASUVORK5CYII=' />
+	<a class="delivphone" href="tel:+74732295854">+7(473)229-58-54</a>
+	</div>
+	<div class="phone1">
+	<img class="car" src='data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAkCAIAAABE0v5gAAAE80lEQVRYw2P4PygBw6izRp01wM76+f37l48fv33+TB4C6v335w+VnXV461Y7XV0jFRVzTU3ykL6KSpKf36c3byh11tePH7csXbpw4sRVM2ZYmZgwUAzYmJnPHT1KqbMuHD0qzcwMN5QVFbGQ7ixRLq4bZ89SHIl//547ePDA+vWHN28+tmXLcSR0eseO4+vXO5IYhGri4m8ePCDfWQ/v3Nm3fv3BzZtP7dt3+sCB0/v3o6GLR46c2rnT0diYJGcZKir+fv2afGcle3kRtIOV9EgU4eVNDAqKiYiICg2NCA7OTkg4f/gwCc46umPHvIkTV86Zg4lWz5u3Zv58Tysr8lI9MKk66Og4Gxi4GRnJCgpKCwpePnWKlLT169f9y5evnzt368IFZHT74sWHV6/GBwaS5ywnC4u/Hz/+/fXr7+/frx49cjA1NVVX/4yt1MDurLXz50PyGiMqYgIjskGQs/N/pEL13rVrSmJiaRER/zFKWuzOunXpUktlZUtVVVt1NTJqBaPu2topLS2p4eHsLKQVFKmhoWgWbVm2jIuBYdHkyQSc9fn9++cPH7558eL9ixfvgOjlSzT0Hkx+fP164+LFAhwcJDmrODYWFDC/fyPQ//8dlZVSXFxnUJM/irO+ffoU5+fHz8oqyssrzscHQWJwxMsrLSysKi2tJi2tLisrws1NaiQaKykVJCTkxsTkREdDUFFiYkpICDDMQ1xdf339it1ZP759m9DWlhgSkhIRAUfp0dGZcXFAVJCW5mZtzUAbIMXOfv/qVXxp69+vX8jh/PvLly+vXn198+bH+/ebFizgoI2zJFlYbl28SEILYkpzs4msrLWqqp2amqKQEI1CS4WP78mNG8Q66++fP4nR0ZimAIsJdgocAdSOFuq6srJvHz8m1ll/fv2KCghA1s/BzJwVEbFl+fK9mzY15OXxsZPmPDZGxvTg4M3Llh3YurWjpESUhwcibmNiAmwqEuusn1++eCJVyTwcHNNaW5fMmhXu6xvg5rZo5szls2fzcHIS6SYONjZggbd95cqEwMAwN7elM2duXryYH5yj3ezsvuPKiZjg+4cPDhoa0JBnZCxJTp7U1sbGBC3qgRl7wZQpxUlJRDorOyZmxaxZ/LDSDlhtzJ8woSo7G8iO8vf//eMHsc568/KlEh8fxBQZUdHFEyfKS0kJ8vLO6O6uLylhYWIy0tFZPmsWKyMjQTcJcXGtmj5dR0kJqH1Ob+/EhgZ+Li4dFZW1c+cCZYHhB6wriXXW548ffa2sgAkIiIIcHLqbmoBGdNTWQqpzZysrAT6+Rb29wDIWqICfkxMXAsp6mJktnjQJqL2zuhpieJCfH7BNsai/X0VIaEZHB2ldjGf37+9dt27funV3zp2rKikBmrtx9WpQ8fbnj7ONDQcr67Fdu07t3g1Uc2DjRlwIqP3GuXMzwc7auHAhxOSI0FAg99i2bVeOH/+BlLBI7id2NjYCDQr28rp/+/b07m5OdnZjDY2vqCbiAavmzwdqD/fze3znzpqFC/l4eAxUVH58+UJp9/X8yZNyYmKgpiYswS2ZM4d47Q9u3tRWVASV6by8kFwDzIzU6VUvnTNHTVER2BpRkZOb3Nn57+9fkrRvX7dOX1OTl5FRXV5+Wmfnfxzayens371+/eDWrXeQalaSwLMHD45u337/2rXRoZFRZw0AAADwM7KP7ToTbgAAAABJRU5ErkJggg==' />
+	<span class="deliv"> доставка с 10:00 до 02:00</span>
+	</div>
+</div>
+{{if gt .UserID 0 }}
+<nav class="main-tabs"> 
+{{else}} 
+<nav class="main-tabs is_two"> 
+{{ end }}
+
+	<ul>
+	<li class="catalog"><a href="/catalog/">
+	<svg class="catalog" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+	<path d="M16 6v6c0 1.1.9 2 2 2h1v7c0 .55.45 1 1 1s1-.45 1-1V3.13c0-.65-.61-1.13-1.24-.98C17.6 2.68 16 4.51 16 6zm-5 3H9V3c0-.55-.45-1-1-1s-1 .45-1 1v6H5V3c0-.55-.45-1-1-1s-1 .45-1 1v6c0 2.21 1.79 4 4 4v8c0 .55.45 1 1 1s1-.45 1-1v-8c2.21 0 4-1.79 4-4V3c0-.55-.45-1-1-1s-1 .45-1 1v6z"/>
+	</svg>
+				  </a></li>
+				  
+	<li class="active"><a data-section="recommend" href="#">
+	            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 241.66 241.66" >
+	<path d="M208.632,133.579c10.345,0.472,19.121-7.677,19.574-18.203
+		c0.453-10.526-6.821-19.989-17.174-20.444l-68.73-8.63c0,0,14.323-23.958,14.323-59.455C156.625,3.184,139.72,0,129.778,0
+		c-7.821-0.003-9.927,15.151-9.927,15.151h-0.016c-1.771,9.717-4.077,18.203-12.09,33.827C98.775,66.49,86.559,64.847,72.297,80.445
+		c-2.517,2.747-5.899,7.281-9.195,12.86c-0.269,0.295-0.52,0.708-0.763,1.289c-0.294,0.692-0.646,1.172-0.956,1.812
+		c-0.546,1.003-1.083,2.006-1.611,3.059c-8.827,8.827-22.579,7.925-28.435,7.925c-11.746,0-17.898,6.825-17.898,17.898
+		l-0.004,81.828c0,12.423,5.083,16.613,17.903,16.613h17.898c9.011,0,16.067,5.166,26.848,8.949
+		c14.767,5.116,36.821,8.956,74.811,8.956c6.644,0,27.251,0.025,27.251,0.025c6.309,0,11.377-2.882,15.034-6.362
+		c1.392-1.323,2.844-3.245,3.465-6.995c0.101-0.581,0.209-3.017,0.193-3.346c0.477-10.728-6.008-14.612-9.682-15.835
+		c0.1-0.034,0.034-0.126,0.234-0.118l11.663,0.522c10.353,0.472,20.572-6.986,20.572-19.669c0-10.517-8.525-17.934-18.844-18.439
+		l6.184,0.287c10.352,0.455,19.103-7.694,19.582-18.22C226.998,142.959,218.977,134.052,208.632,133.579z"/>
+	</svg>
+            </a></li>
+	<li><a href="#" data-section="popular">
+	            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 47.94 47.94">
+	<path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+		c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+		c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+		c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+		c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+		C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+	</svg>
+
+            </a></li>
+	{{if gt .UserID 0 }}
+		<li><a href="#" data-section="liked" class="liked">
+	            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 51.997 51.997">
+<path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+	C52.216,18.553,51.97,16.611,51.911,16.242z M15.999,9.904c-4.411,0-8,3.589-8,8c0,0.553-0.447,1-1,1s-1-0.447-1-1
+	c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1S16.551,9.904,15.999,9.904z"/>
+</svg>
+            </a></li>
+	{{ end }}
+	</ul>
+</nav>
+	
+<div data-section="recommend" class="row product-list index-products first" style> 
+{{ template "product-list_recomended" . }}
+</div>   
+<div data-section="popular" class="row product-list index-products" style>
+{{ template "product-list_popular" . }}
+</div>
+
+{{if gt .UserID 0 }}
+<div data-section="likes" class="row product-list index-products" style>
+{{ template "product-list_likes" . }}
+</div>
+
+{{end}} 
+      
+
+{{ else }}
+
+<main class="container ">
+	<div class="slider-container">
+	<div class="spinner"></div>
+	     <div class="bd-slider carousel">
+		     	{{range GetMenuList 3}}
+					<div class="carousel-cell"><a href="{{ .Uri}}"><img class="carousel-cell-image" src="{{ .PicUri}}" alt="{{ .PicAlt}}" title="{{ .PicTitle}}"></a></div>
+				{{end}}		           
+        </div>
+		</div>
+		
+		
+          <div class="row products-sub-menu-main">
+		  		
+          <div class="col-lg-12">
+            <nav>
+              <ul>
+	            	                              <li class="active"><a href="#" data-section="recommend">Рекомендуем</a></li>
+	                              <li ><a href="#" data-section="popular">Популярные</a></li>
+{{if gt .UserID 0 }}
+					<li ><a class="likelink" href="#" data-section="likes">Любимые</a></li>
+{{end}}
+
+
+                              </ul>
+            </nav>
+          </div>
+        </div>
+<div data-section="recommend" class="row product-list index-products first clearfix" style> 
+{{ template "product-list_recomended" . }}
+</div>            
+
+<div data-section="popular" class="row product-list index-products clearfix" style>
+{{ template "product-list_popular" . }}
+</div>
+
+{{if gt .UserID 0 }}
+<div data-section="likes" class="row product-list index-products clearfix" style>
+{{ template "product-list_likes" . }}
+</div>
+{{end}}
+
+{{ end }}
+<div class="it-seo-text">
+
+{{ .Content }}
+
+</div>
+</main>
+<div class="grey-fw-container main-last-container"> 
+{{ .Content2 }}
+{{ template "footer" . }}
+
+
+
+</body>
+{{ end }}

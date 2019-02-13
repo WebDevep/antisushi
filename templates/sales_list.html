@@ -1,0 +1,35 @@
+{{ define "sales_list" }}
+
+{{ template "header" . }}
+<body class="  index-page fixed-header">
+{{ template "menu" . }} 
+</header>
+<div class="content container">
+<div class="breadcrumb-box">
+<br>
+<h1 class="font-fix">
+{{ .H1Header }}
+</h1>
+<div class="row news-list">
+{{range GetPagesList .TemplateName}}
+<article itemscope="" itemtype="http://schema.org/Article" class="news-item with-photo col-xs-12 ">
+<div class="news-content">
+	<div class="col-xl-5 col-lg-5 col-md-3 col-sm-3 col-xs-3 news-photo">
+		<img class="preview_picture" src="{{ .MainPicture }}" style="float:left" border="0">
+	</div>
+	<div class="col-xl-7 col-lg-7 col-md-9 col-sm-9 col-xs-9 news-text">
+		<div class="news-title"> <span itemprop="headline name">{{.Title}}</span></div>
+		<div class="news-text" itemprop="articleBody">{{.Content}}</div>
+	</div>
+</div>
+</article>
+{{ end }}
+</div>
+{{ .Content }}
+</div>
+
+
+{{ template "footer" . }}
+<div>
+</body>
+{{ end }}

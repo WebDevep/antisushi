@@ -1,0 +1,249 @@
+{{ define "items" }}
+
+{{ template "header" . }}
+<body class="  index-page fixed-header">
+{{ template "menu" . }} 
+</header>
+<script>  {{ $Item := GetProductByID .Session .InternalID }} 
+</script>
+{{ if .IsMobile }}
+
+ <div class="status-bar"><a href="/" class="back"></a>
+     <div class="title">{{ $Item.Caption }}</div>
+        </div>
+        <div class="product-detail-cont">
+	        <div class="col-lg-3 col-xl-3 col-sm-6  product-detail">
+		        <div data-id="{{ $Item.ID }}" itemscope itemtype="https://schema.org/Product" class="product" id="{{ $Item.ID }}">
+			        <div data-modal="product-detail" class="preview md-trigger">
+						{{ if $Item.IsProductLabels}}
+					        <div class="product-labels">								
+								{{range $Item.ProductLabels}}    <div title="{{ .LabelName }}" class="product-label"><img src="{{ .LabelPicUri }}"></div>  {{ end }}
+					        </div>
+						{{ end }}
+
+				        <picture>		                   
+                           <a itemprop="image" href="{{ $Item.ImgUri }}" onclick="return false;">
+		                   <img
+			                   src="{{ $Item.ImgUri }}"
+                               alt="{{ $Item.ImgAlt }}"
+                               title="{{ $Item.ImgTitle }}"
+							   description="{{ $Item.ImgDescript }}"
+                               class="product-image"
+		                   />
+		                   </a>
+	                   </picture>
+
+				        <div class="overlay">
+					        <div class="zoom-btn"></div>
+				        </div>
+				        {{ if $Item.NoSale }}
+							<div title="На этот товар не действуют дополнительные скидки и акции" class="without-sale"></div>
+						{{ end }} 
+				        <div class="likes">
+					        <div class="like-content">
+						        <div class="like-icon"></div><span>{{ $Item.LikesCount }}</span>
+					        </div>
+				        </div>
+			        </div>
+			        <div class="product-info"><a href="{{ $Item.ItmUri }}" class="product-title font-fix"><span itemprop="name">{{ $Item.Caption }}</span></a>
+				        <div class="product-description">
+					        <div itemprop="description" class="detail-text">{{ $Item.Discription}}</div>
+								<div class="composition">
+								{{ range $Item.CompositList }}
+									<a href="#" class="composition__item" data-roll-id="{{ .Id }}">{{ .Name }}
+										  <div class="composition__item__popover" data-roll-id="{{ .Id }}">
+											  <div class="composition__item__image"><img src="{{ .PicUri }}"></div>
+											  <div class="composition__item__text">
+												  <p><strong>{{ .Name }}</strong></p>
+												  <p>{{ .Dicrip }}</p>
+											  </div>
+										  </div>
+									</a>
+								{{ end }}	
+								</div>
+				        </div>
+				        
+				<div class="product-energy" style="display:block"><a href="#">Энергетическая ценность</a>
+					<div class="energy-value-content">
+						<ul>
+						  <li style="display: none"><span class="meta-property">
+							  <div>Белки</div></span><span class="meta-value"></span></li>
+						  <li style="display: none"><span class="meta-property">
+							  <div>Жиры</div></span><span class="meta-value"></span></li>
+						  <li style="display: none"><span class="meta-property">
+							  <div>Углеводы</div></span><span class="meta-value"></span></li>
+						  <li><span class="meta-property">
+							  <div>Калорийность</div></span><span class="meta-value"></span></li>
+						</ul>
+					</div>
+				</div>
+				        <div class="product-options">
+					     <!--   <?php  foreach($arResult['PROPS'] as $key=>$props): ?>
+						        <div class="options-row-select col-xl-<?php echo 12/count($arResult['PROPS']); ?> col-lg-12 options-length-<?php echo count($arResult['PROPS']); ?>">
+							        <select class="prop_">
+								        <option value="null"><?php echo $key; ?></option>
+								        <?php foreach($props as $j=>$val): ?>
+									        <option value="<?php echo $j; ?>" data-price="<?php echo $val['PRICE']; ?>" data-old-price="<?php echo $val['OLD_PRICE']; ?>" data-weight="<?php echo $val['WEIGHT']; ?>"><?php echo $val['VALUE']; ?></option>
+								        <?php endforeach; ?>
+							        </select>
+						        </div>
+					        <?php endforeach; ?> -->
+				        </div>
+				        <div class="product-footer {{ if $Item.IsOldPrice}} {{ else }} base-price {{ end }}">
+					        <div class="product-prices font-fix">
+
+	                  <span class="old-price" {{ if $Item.IsOldPrice}} {{ else }}style="display: none;" {{ end }}>
+	                  	<span class="line-through">{{ $Item.OldPrice}}</span><span class="currency">R</span>
+	                  </span>
+						        <span itemprop="offers" itemscope itemtype="https://schema.org/Offer" class="current-price"><span itemprop="price">{{ $Item.Price }}</span><span class="currency">R</span>
+	                <!--  <span itemprop="priceCurrency" class="text-hide"><?=CURRENCY_CODE?></span> -->
+	                  </span>
+
+						        <span class="weight"><span>{{ $Item.Weight}}</span><span> гр.</span></span>
+
+					        </div>
+								<div class="product-actions">
+									<a  data-id="{{ $Item.ID}}" href="#" class="add-to-cart-btn native">Добавить в корзину</a>
+								</div>
+								<div class="back-to-catalog font-fix"><a href="/catalog/"><span class="go-back">Вернуться в каталог</span></a></div>
+				        </div>
+			        </div>
+		        </div>
+	        </div>
+</div>      
+
+{{ else }}
+<div class="content container">
+<div class="col-lg-12 breadcrumb-box">
+    <div class="breadcrumb-container font-fix open">
+				<div class="breadcrumb-path-container">
+		<a href="/"> Главная  </a>
+		<span> / </span>
+		<a href="/catalog/">Каталог </a>
+		<span> / </span>
+{{ range .MenuStructure }}
+		{{ if .IsActive }}
+		<a href="{{ .GroupURL }}">{{ .GroupName }}</a>
+		<span> / </span>
+		{{ end }}
+		{{ if .IsSubMenu }}
+	{{ range .SubMenus }}
+		{{ if .IsActive }}
+			<a class="active" href=" {{ .GroupURL }}"> {{ .GroupName }}</a>
+			<span> / </span>
+		{{ end }}
+	{{ end }}
+		{{ end }}
+{{ end }}
+		<a href="">{{ $Item.Caption }}</a>
+				
+</div>
+</div>
+<br>
+<h1 class="font-fix">{{ $Item.Caption }}</h1>
+
+</div>
+
+<div class="row container product product-detail" itemscope itemtype="https://schema.org/Product" data-id="{{ $Item.ID}}">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 push-lg-4">
+            <div class="preview">
+				{{ if $Item.IsProductLabels}}
+                    <div class="product-labels">
+                {{range $Item.ProductLabels}}    <div title="{{ .LabelName }}" class="product-label"><img src="{{ .LabelPicUri }}"></div>  {{ end }}
+                    </div>
+				{{ end }}
+				
+	                   <picture>
+		                   <source srcset="{{ index $Item.SubImgUris 0 }}" media="(max-width: 554px)">
+                           <source srcset="{{ index $Item.SubImgUris 0 }}" media="(max-width: 768px)">
+                           <source srcset="{{ index $Item.SubImgUris 0 }}" media="(max-width: 992px)">
+                           <source srcset="{{ index $Item.SubImgUris 0 }}" media="(max-width: 2000px)">
+                           <a itemprop="image" href="{{ $Item.ImgUri }}" onclick="return false;">
+		                   <img
+			                   src="{{ $Item.ImgUri }}"
+                               alt="{{ $Item.ImgAlt }}"
+                               title="{{ $Item.ImgTitle }}"
+							   description="{{ $Item.ImgDescript }}"
+                               class="product-image"
+		                   />
+		                   </a>
+	                   </picture>
+	            <div class="likes">
+                    <div class="like-content">
+                        <div class="like-icon"></div><span>{{ $Item.LikesCount }}</span>
+                    </div>
+                </div>
+              <div class="icons">
+                <div class="product-icon icon-hot"></div>
+                <div class="product-icon icon-vegan"></div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 pull-lg-4">
+	          <div class="hidden-xs-up" itemprop="name">{{ $Item.Caption }}</div>
+            <div itemprop="description" class="product-description">
+                    {{ $Item.Discription}}
+			
+                  <div class="composition">
+					{{ range $Item.CompositList }}
+                        <a href="#" class="composition__item" data-roll-id="{{ .Id }}">{{ .Name }}
+                              <div class="composition__item__popover" data-roll-id="{{ .Id }}">
+                                  <div class="composition__item__image"><img src="{{ .PicUri }}"></div>
+                                  <div class="composition__item__text">
+                                      <p><strong>{{ .Name }}</strong></p>
+                                      <p>{{ .Dicrip }}</p>
+                                  </div>
+                              </div>
+                        </a>
+					{{ end }}	
+                  </div>
+			</div>
+			<div class="product-energy" style="display:block"><a href="#">Энергетическая ценность</a>
+              <div class="energy-value-content">
+                <ul>
+                  <li style="display: none"><span class="meta-property">
+                      <div>Белки</div></span><span class="meta-value"></span></li>
+                  <li style="display: none"><span class="meta-property">
+                      <div>Жиры</div></span><span class="meta-value"></span></li>
+                  <li style="display: none"><span class="meta-property">
+                      <div>Углеводы</div></span><span class="meta-value"></span></li>
+                  <li><span class="meta-property">
+                      <div>Калорийность</div></span><span class="meta-value"></span></li>
+                </ul>
+              </div>
+            </div>
+			<div class="product-options">
+              <div class="clearfix"></div>
+            </div>
+			<div class="base-price">
+              <div class="product-prices font-fix">
+			  {{ if $Item.IsOldPrice}}
+                      <span class="old-price">
+                          <span class="line-through">{{ $Item.OldPrice}}</span>
+                          <span class="currency">R</span>
+                      </span>
+			  {{ end }}
+                  <span itemprop="offers" itemscope itemtype="https://schema.org/Offer" class="current-price"><span itemprop="price">{{ $Item.Price }}</span><span class="currency">R</span>
+                      <span itemprop="priceCurrency" class="text-hide">RUB</span>
+                      </span>
+                  <span class="weight"><span>{{ $Item.Weight}}</span><span>гр.</span></span>
+				{{ if $Item.NoSale }}
+							<div title="На этот товар не действуют дополнительные скидки и акции" class="without-sale"></div>
+                {{ end }} 
+              </div>
+            </div>
+            <div class="product-actions">
+                <a  data-id="{{ $Item.ID}}" href="#" class="add-to-cart-btn native">Добавить в корзину</a>
+            </div>
+			<div class="back-to-catalog font-fix"><a href="/catalog/"><span class="go-back">Вернуться в каталог</span></a></div>
+          </div>
+</div>
+
+{{ end }}
+</div>
+{{ template "footer" . }}
+
+
+
+</body>
+{{ end }}

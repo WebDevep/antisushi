@@ -1,0 +1,150 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="{{.Description}}" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{{.Title}}</title>
+
+{{ if .IsMobile }}
+
+	<link href="/assets/css/mobile/style.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/roboto.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/flickity.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/currency.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/custom.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/selectordie.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/reset.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/template_styles.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/jquery.scrollbar.css" type="text/css" rel="stylesheet">
+	<link href="/assets/jquery/jquery-ui.min.css" type="text/css" rel="stylesheet">	
+	
+	<script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/assets/jquery/jquery-ui.min.js"></script>
+	<script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
+	<script type="text/javascript" src="/assets/js/popper.js"></script>
+	<script type="text/javascript" src="/assets/js//jquery.mask.min.js"></script>	
+	<script type="text/javascript" src="/assets/js/flickity.pkgd.js"></script>
+	<script type="text/javascript" src="/assets/js/mobile/jquery.mmenu.all.min.umd.js"></script>
+	<script type="text/javascript" src="/assets/js/mobile/selectordie.js"></script>
+	<script type="text/javascript" src="/assets/js/mobile/sourcebuster.min.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.scrollbar.js"></script>
+	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/mobile/script.js"></script>
+	
+
+{{ else }}
+
+    <!-- Bootstrap -->
+
+   <link href="/assets/css/style.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/animate.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/jquery.fancybox.css" type="text/css" rel="stylesheet"> 
+   <link href="/assets/css/flickity.css" type="text/css" rel="stylesheet">
+   <link href="/assets/jquery/jquery-ui.min.css" type="text/css" rel="stylesheet">
+   <!--<link href="/assets/css/jqueto.css" type="text/css" rel="stylesheet">-->
+   <link href="/assets/css/jquery.scrollbar.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/jquery.webui-popover.css" rel="stylesheet">
+   <link href="/assets/css/selectordie.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/roboto.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/currency.css" type="text/css" rel="stylesheet">
+<!--    <link href="/assets/css/update.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/animate.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/popover.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/selectordie.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/currency.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/flickity.css" type="text/css" rel="stylesheet">
+
+    <link href="/assets/jquery/jquery-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/jqueto.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/jquery.scrollbar.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/robory.fancybox.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/template_styles.css" rel="stylesheet">-->
+	
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/assets/jquery/jquery-ui.min.js"></script>
+	<script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
+	<script type="text/javascript" src="/assets/js/popover.js"></script>
+	<script type="text/javascript" src="/assets/js/popper.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.scrollbar.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.mask.min.js"></script>	
+	<script type="text/javascript" src="/assets/js/flickity.pkgd.js"></script>
+	<script type="text/javascript" src="/assets/js/selectordie.js"></script>
+	<script type="text/javascript" src="/assets/js/modal.js"></script>
+	<script type="text/javascript" src="/assets/js/infinite-scroll.js"></script>
+<!--    <script type="text/javascript" src="/assets/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/assets/js/popover.js"></script>
+	<script type="text/javascript" src="/assets/js/min/tether.min.js"></script>
+	<script type="text/javascript" src="/assets/js/min/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/selectordie.js"></script>
+	<script type="text/javascript" src="/assets/js/tabs.js"></script>
+    <script type="text/javascript" src="/assets/js/modal.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.maskedinput.min.js"></script>	
+    <script type="text/javascript" src="/assets/js/cookie.js"></script>
+    <script type="text/javascript" src="/assets/js/sourcebuster.min.js"></script>
+    <script type="text/javascript" src="/assets/js/share.js"></script>
+    <script type="text/javascript" src="/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/assets/js/script.js"></script>	-->
+	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/main.js"></script>
+	
+<!--    <script type="text/javascript" src="/assets/js/tmpl.js"></script>
+    <script type="text/javascript" src="/assets/js/min/jquery.scrollbar-min.js"></script>
+    <script type="text/javascript" src="/assets/js/selectordie.js"></script>
+	
+    <script type="text/javascript" src="/assets/js/tabs.js"></script>
+    <script type="text/javascript" src="/assets/js/modal.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript" src="/assets/js/cookie.js"></script>
+    <script type="text/javascript" src="/assets/js/sourcebuster.min.js"></script>
+    <script type="text/javascript" src="/assets/js/share.js"></script>
+    <script type="text/javascript" src="/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/assets/js/script.js"></script>-->
+<!--	<script type="text/javascript" src="/assets/js/kernel_main.js"></script>-->
+<!--	<script type="text/javascript" src="/assets/js/kernel_jquery.js"></script>-->
+<!--	<script type="text/javascript" src="/assets/js/templateb.js"></script>-->
+<!--    <script type="text/javascript" src="/assets/js/script.js"></script>-->
+	<!--    <script type="text/javascript" src="/assets/js/templateb.js"></script>-->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+{{ end }}
+
+<script>
+var Session = {{ .Session}}
+
+{{$User := GetCurrentUser .Session }};
+var User = {{$User}}
+var CustomerID = {{$User.CustomerID}}
+checkoutuser(User);
+
+{{ if gt .UserID 0 }}
+window.top_navbar = '<a href="/my/" class="settings-icon"><span class="icon"></span></a><a href="#" onclick="openMainProfileNav();" class="profile-icon"><span class="icon"></span>';
+window.top_navbar += '<div class="login-text">Мои бонусы<span class="bonus_value">{{$User.Bonuses}}<span class="currency">R</span></span></div>';
+window.top_navbar += '</a><a href="?logout=yes" class="logout-icon"><span class="icon"></span></a>';
+{{ else }}
+window.top_navbar = '<a href="#" class="profile-icon login-trigger"><span class="icon"></span><div class="login-text login-fixed guest">Войти</div></a>';
+{{ end }}
+
+{{$Basket := GetBasket .Session }};
+var Basket = {{$Basket}}
+</script>
+
+	
+</head>
+
+{{ end }}

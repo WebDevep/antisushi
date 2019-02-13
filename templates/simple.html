@@ -1,0 +1,29 @@
+{{ define "simple" }}
+
+{{ template "header" . }}
+<body class="  index-page fixed-header">
+{{ template "menu" . }} 
+</header>
+{{ if .IsMobile }}
+<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa03eb3815172880efd3b60a4de7e2595dfbfc98885d19f4561eac05cc4df94bb&amp;width=95%&amp;height=350&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>
+{{ else }}
+<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa03eb3815172880efd3b60a4de7e2595dfbfc98885d19f4561eac05cc4df94bb&amp;width=100%&amp;height=550&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>
+{{ end }}
+<div class="content container">
+<div class="row">
+          <div class="col-lg-12 breadcrumb-box">
+            <h1 class="font-fix">{{ .H1Header }}</h1>
+          </div> 
+        </div>
+<div class="content-page page-simple delivery-page">		
+{{ .Content }}
+<div class="map-placeholder" id="map">
+</div>
+</div>
+
+{{ template "footer" . }}
+</div>
+</body>
+
+
+{{ end }}
