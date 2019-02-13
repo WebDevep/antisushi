@@ -1810,6 +1810,7 @@ $(document).ready(function () {
 
 $(window).on('load',function() {
 	getcheckoutbasket();
+	$('#preloader').hide();	
 })
 $(document).ready(function () {
 	$('li.dropdown').hover(function() {
