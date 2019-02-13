@@ -40,6 +40,12 @@ $(document).ready(function () {
 			if (!gifts.is(e.target) && gifts.has(e.target).length === 0) {
 				$('.gift-sticky .gift-toggle').click();
 			}
+			var giftsPopup = $("#gift-modal");
+			if (!giftsPopup.is(e.target) && giftsPopup.has(e.target).length === 0) {
+				$('#gift-modal').removeClass('show');
+				$('.modal-backdrop').removeClass('show');
+				$('.modal-backdrop').remove();
+			}
 			var filter = $("#ingridients-filter"), filterA=$('.products-sub-menu .filter-link-wrapper');
 			if ( (!filter.is(e.target) && filter.has(e.target).length === 0) &&
 			(!filterA.is(e.target)) ) {
