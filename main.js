@@ -34,6 +34,15 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
 }
 
 $(document).ready(function () {
+	jQuery(function($){
+		$(document).mouseup(function (e){
+			var gifts = $(".gift-sticky .expanded-gift.open");
+			if (!gifts.is(e.target) && gifts.has(e.target).length === 0) {
+				$('.gift-sticky .gift-toggle').click();
+			}
+		});
+	});
+
 	$('#callback-form input[name="agreement"]').wrap('<span class="modern-checkbox"></span>');
 	$('#callback-form .modern-checkbox').append('<span class="checkbox"></span>');
 
