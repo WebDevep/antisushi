@@ -40,6 +40,11 @@ $(document).ready(function () {
 			if (!gifts.is(e.target) && gifts.has(e.target).length === 0) {
 				$('.gift-sticky .gift-toggle').click();
 			}
+			var filter = $("#ingridients-filter"), filterA=$('.products-sub-menu .filter-link-wrapper');
+			if ( (!filter.is(e.target) && filter.has(e.target).length === 0) &&
+			(!filterA.is(e.target)) ) {
+				$('#popover-ingridients-filter').hide();
+			}
 		});
 	});
 
