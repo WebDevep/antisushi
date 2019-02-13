@@ -385,6 +385,9 @@ $(function() {
 			$('.collapsed-gift').hide();
 			return false;
 		})
+		$('.collapsed-gift .gift-toggle').on('click',function(e){
+			renderBasket();
+		})
 		$('.expanded-gift .gift-toggle').on('click',function(e){
 			e.preventDefault();
 			$('.expanded-gift').removeClass('open').hide();
@@ -1062,7 +1065,25 @@ function renderBasket(){
 	  dataType: "json",
 	  url: '/bd/basket/?getBasket',
 	  data: {'url': url, 'Session':Session},
-	  success: renderBasketItems
+	  success: function (data) {
+	  	renderBasketItems(data);
+		if (data['BasketPrice']) {
+			if (data['BasketPrice'] > 3000) {
+				$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(1) .get-gift').css('display','block');
+			} else {
+				$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(1) .get-gift').css('display','none');
+				if (data['BasketPrice'] > 2000) {
+					$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(2) .get-gift').css('display','block');
+				} else {
+					$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(2) .get-gift').css('display','none');
+					if (data['BasketPrice'] > 1250) {
+						$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(3) .get-gift').css('display','block');
+					} else
+						$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(3) .get-gift').css('display','none');
+				}
+			}
+		}
+	  }
 	});
 }
 
@@ -1668,8 +1689,6 @@ $(document).ready(function () {
 					dataType: "json",
 					url: '/bd/basket/?addToBasket',
 					success: function(data){
-
-
 						renderSummary(data);
 						renderBasketItems(data);
 					}
