@@ -1,0 +1,94 @@
+{{ define "simple" }}
+
+{{ template "header" . }}
+<body class="  index-page fixed-header">
+{{ template "menu" . }} 
+</header>
+{{ if .IsMobile }}
+<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa03eb3815172880efd3b60a4de7e2595dfbfc98885d19f4561eac05cc4df94bb&amp;width=95%&amp;height=350&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>
+{{ else }}
+<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa03eb3815172880efd3b60a4de7e2595dfbfc98885d19f4561eac05cc4df94bb&amp;width=100%&amp;height=550&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>
+{{ end }}
+<div class="content container">
+<div class="row">
+          <div class="col-lg-12 breadcrumb-box">
+            <h1 class="font-fix">{{ .H1Header }}</h1>
+          </div> 
+        </div>
+<div class="content-page page-simple delivery-page">		
+{{ .Content }}
+<div class="map-placeholder" id="map">
+</div>
+</div>
+
+{{ template "footer" . }}
+</div>
+
+{{ if .IsMobile }}
+
+<!-- MOBILE START -->
+
+	<link href="/assets/css/mobile/style.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/roboto.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/flickity.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/currency.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/custom.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/selectordie.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/reset.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/mobile/template_styles.css" type="text/css" rel="stylesheet">
+	<link href="/assets/css/jquery.scrollbar.css" type="text/css" rel="stylesheet">
+	<link href="/assets/jquery/jquery-ui.min.css" type="text/css" rel="stylesheet">	
+	
+	<script type="text/javascript" src="/assets/jquery/jquery-ui.min.js"></script>
+	<script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
+	<script type="text/javascript" src="/assets/js/popper.js"></script>
+	<script type="text/javascript" src="/assets/js//jquery.mask.min.js"></script>	
+	<script type="text/javascript" src="/assets/js/flickity.pkgd.js"></script>
+	<script type="text/javascript" src="/assets/js/mobile/jquery.mmenu.all.min.umd.js"></script>
+	<script type="text/javascript" src="/assets/js/mobile/selectordie.js"></script>
+	<script type="text/javascript" src="/assets/js/mobile/sourcebuster.min.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.scrollbar.js"></script>
+	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+	
+<!-- MOBILE END -->
+
+{{ else }}
+
+<!-- PC START -->
+
+   <link href="/assets/css/style.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/animate.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/jquery.fancybox.css" type="text/css" rel="stylesheet"> 
+   <link href="/assets/css/flickity.css" type="text/css" rel="stylesheet">
+   <link href="/assets/jquery/jquery-ui.min.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/jquery.scrollbar.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/jquery.webui-popover.css" rel="stylesheet">
+   <link href="/assets/css/selectordie.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/roboto.css" type="text/css" rel="stylesheet">
+   <link href="/assets/css/currency.css" type="text/css" rel="stylesheet">
+
+	<script type="text/javascript" src="/assets/jquery/jquery-ui.min.js"></script>
+	<script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
+	<script type="text/javascript" src="/assets/js/popover.js"></script>
+	<script type="text/javascript" src="/assets/js/popper.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.scrollbar.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.mask.min.js"></script>	
+	<script type="text/javascript" src="/assets/js/flickity.pkgd.js"></script>
+	<script type="text/javascript" src="/assets/js/selectordie.js"></script>
+	<script type="text/javascript" src="/assets/js/modal.js"></script>
+	<script type="text/javascript" src="/assets/js/infinite-scroll.js"></script>
+	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<!-- PC END -->
+
+{{ end }}
+
+</body>
+
+{{ end }}
