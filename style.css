@@ -14720,14 +14720,30 @@ p.composition__item__detail {
 .md-content h3 {
 	color: #000;
 	margin: 0;
-	padding: .4em;
+	padding: 18px 0 0 0;
 	text-align: center;
-	font-size: 20px;
+	font-size: 28px;
 	font-weight: 400;
 	opacity: .8;
-	background: rgb(245, 245, 245);
+	background: #f5f5f5;
 	border-radius: 3px 3px 0 0;
 }
+.modern-checkbox input[type="checkbox"] {
+	display:none;
+}
+.modern-checkbox .checkbox {
+	background: #fff;
+	width:24px;
+	height: 24px;
+	background-color: #fff;
+	border: 1px solid lightgray;
+	border-radius: 4px;
+	text-align: center;
+	padding: 0px 10px;
+	margin: 0 6px 0 0;
+}
+.modern-checkbox .checkbox.active {background-color: red;}
+
 .md-show {
 	visibility: visible !important;
 	display: block !important;
