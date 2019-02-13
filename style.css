@@ -14924,6 +14924,8 @@ p.composition__item__detail {
     top: 18px;
 }
 
+#gift-modal:not(.show) {display: none !important};
+
 /*.gift-progress-info .progress-container .native_text, .gift-progress-info .progress-container .hover_text { color: transparent; }*/
 
 @media screen and (max-width: 479px) {
