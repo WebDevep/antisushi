@@ -206,14 +206,15 @@ $(document).ready(function () {
 	})
 	$('#callback-form').on('submit',function(e) {
 		e.preventDefault();
-		json_data= JSON.stringify($('#callback-form').serializeArray());
+		json_data= {"name":"'+$('#callback-form [name="name"]').val()+'","phone":"'+$('#callback-form [name="phpne"]').val()+'","session":"'+Session+'"};
+		console.log(json_data);
 
 		$.ajax({
 				url: '/?callback_req',
 				type: 'post',
 				dataType : "json",
 				cache: false,
-				data: { 'name':$('#callback-form [name="name"]').val(),'phone':$('#callback-form [name="name"]').val(),'session':Session },
+				data: json_data,
 				success: function (data) { 
 					$('#callback-form input').each(function() { $(this.val('')); });
 					$('#callback-form [name="agreement"]').prop('checked',false);
