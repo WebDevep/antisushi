@@ -1,3 +1,8 @@
+$(window).on('load',function() {
+	getcheckoutbasket();
+	$('#preloader').hide();
+})
+
 function animateNumbers(elem,new_val){
 	$({val_i: parseInt($(elem).text().split(' ').join(''))}).animate({val_i: parseInt(new_val)}, {
 		duration: 500,
