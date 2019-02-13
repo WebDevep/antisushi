@@ -244,7 +244,7 @@ $(document).ready(function () {
 	})
 	$('#callback-form').on('submit',function(e) {
 		e.preventDefault();
-		json_data= jQuery.parseJSON ('{"name":"'+$('#callback-form [name="name"]').val()+'","phone":"'+$('#callback-form [name="phpne"]').val()+'","session":"'+Session+'"}');		
+		json_data= jQuery.parseJSON ('{"name":"'+$('#callback-form [name="name"]').val()+'","phone":"'+$('#callback-form [name="phone"]').val()+'","session":"'+Session+'"}');		
 		console.log(json_data);
 
 		$.ajax({
@@ -427,7 +427,6 @@ function test1() {
 
 
 //  auth
-
 
 $(document).ready(function () {
 	$('.auth-btn').on('click', function(e){
@@ -1754,7 +1753,9 @@ $(document).ready(function () {
 				$('.btn-get-gift').text('Выбрать');
 				$('.product.gift:not(.masked) .get-gift-btn').text('Выбрать');
 				$('.get-gift-btn').removeClass('reset-gifts');
-				$('.product.gift.masked').each(function() { $(this).removeClass('masked)'); })
+				$('#gift-modal .product.gift.masked').each(function() {
+					$(this).removeClass('masked');
+				});
 				$(this).removeClass('reset-gifts');
 				return 1;
 			}
@@ -1810,7 +1811,7 @@ $(document).ready(function () {
 
 $(window).on('load',function() {
 	getcheckoutbasket();
-	$('#preloader').hide();	
+	$('#preloader').hide();
 })
 $(document).ready(function () {
 	$('li.dropdown').hover(function() {
