@@ -41,6 +41,8 @@ $(window).on('load',function() {
 		$('#preloader').hide();
 	}, 300);
 	renderBasket();
+	$('.basket-btn').click()
+	// $('a.auth-btn').click()
 })
 
 $(window).scroll(function() {
