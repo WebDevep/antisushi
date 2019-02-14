@@ -42,7 +42,7 @@ $(window).on('load',function() {
 		$('#preloader').hide();
 	}, 300);
 	renderBasket();
-	setTimeout(function() {$('.basket-btn').click();$('#basket').css('display','block')},1000)
+	// setTimeout(function() {$('.basket-btn').click();$('#basket').css('display','block');},1000)
 	// $('.basket-btn').click()
 	// $('body').removeClass('hidden')
 })
@@ -74,18 +74,33 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function () {
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/style.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/animate.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/jquery.fancybox.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/flickity.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/jquery-ui.min.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/jquery.scrollbar.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/selectordie.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/roboto.css' />");
+ 	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/currency.css' />");
+
 	currentUrl= window.location.href.split('?')[0].toLowerCase().replace('#','').replace('//','/').replace(' ','');
 
 	/* Страница - каталог */
 	if (currentUrl.indexOf('/catalog/') > -1) {
 		productsCount=0;
 		$('.product-list .product-ajax-cont').each(function() {
-			if (productsCount >= 8) $(this).addClass('hidden'); else	$(this).removeClass('hidden');
+			if (productsCount >= 8) $(this).addClass('hidden'); else $(this).removeClass('hidden');
 			productsCount++
 		})
 		if (productsCount < 8) $('#btn-show-more').hide();
 		showedProducts= 8;
 	}
+
+	$('[data-toggle="popover"]').popover();
+	$('.popover-dismiss').popover({
+	  trigger: 'focus'
+	}) 
 
 	jQuery(function($){
 		$(document).mouseup(function (e){
@@ -131,14 +146,10 @@ $(document).ready(function () {
 	});
 
 	if ($('.not-empty-basket .basket-sum > span').length > 0)
-		if ($('.not-empty-basket .basket-sum > span').html() != '') {
-			$('.not-empty-basket').css('display','block');
+		if ($('.basket-btn .not-empty-basket .basket-sum > span').html() != '') {
+			$('.basket-btn .not-empty-basket').css('display','block');
 		}
 
-	$('[data-toggle="popover"]').popover();
-	$('.popover-dismiss').popover({
-	  trigger: 'focus'
-	})  
 	$('input[name="phone"]').mask("+7(999) 999-99-99");
 	if($('body').hasClass('fixed-header')){
 		$(window).on('scroll',function(){
@@ -1103,8 +1114,7 @@ $(function basket() {
 					$('.product-info-cont .close-view').trigger('click');
 			}
 		}
-			
-			$('.basket-btn').webuiPopover({url:$target,id_:$id,animation: 'fade', onShow: onS,onHide: onH, cache: true,placement: 'bottom-left', container: '.product-categories-container'});
+		$('.basket-btn').webuiPopover({url:$target,id_:$id,animation: 'fade', onShow: onS,onHide: onH, cache: true,placement: 'bottom-left', container: '.product-categories-container'});
 //  };
 	});
 });
