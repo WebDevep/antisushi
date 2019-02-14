@@ -38,11 +38,10 @@ var currentUrl='', showedProducts= 0;
 
 $(window).on('load',function() {
 	getcheckoutbasket();
-	setTimeout(function() { 
-		$('#preloader').hide();
-	}, 300);
 	renderBasket();
-	// setTimeout(function() {$('.basket-btn').click();$('#basket').css('display','block');},1000)
+	$('#basket-btn').click();
+	$('#preloader').fadeOut();
+
 	// $('.basket-btn').click()
 	// $('body').removeClass('hidden')
 })
@@ -74,6 +73,10 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function () {
+	// setTimeout(function() { $('#preloader').fadeOut(), 1});
+	//3 вариант - лауд
+	
+
  	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/style.css' />");
  	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/animate.css' />");
  	$("head").append("<link rel='stylesheet' type='text/css' href='/assets/css/jquery.fancybox.css' />");
