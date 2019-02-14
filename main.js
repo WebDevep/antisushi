@@ -1108,10 +1108,6 @@ $(function basket() {
 	});
 });
 
-$(document).ready(function() {
-	 $('.basket-btn').click();
-});
-
 function checkPromoAjax(){
 	var $input = $('.basket-promo-code');
 	var code_ = $input.val();
