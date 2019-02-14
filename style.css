@@ -14666,7 +14666,11 @@ p.composition__item__detail {
 
 /* MODIFICATIONS BY AROBOT START */
 
+.hidden {width: 0; height: 0; display: none !important}
+
 .text-center {text-align: center;}
+.align-center {margin-left: auto;margin-right: auto}
+
 #global-overlay {position: fixed;left: 0;top:0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);opacity: 0;filter: alpha(opacity=0);-ms-filter: "alpha(opacity=0)";-khtml-opacity: 0; -moz-opacity: 0;display: none;z-index: 99;}
 /*.window-modal {position: fixed;width: 75%;max-width: 320px;height: 320px;overflow-x: hidden;overflow-y: auto;padding: 24px;left:50%;top:50%;margin-left: -160px;margin-top:-160px;}*/
  
@@ -14724,8 +14728,6 @@ p.composition__item__detail {
 	text-align: center;
 	font-size: 28px;
 	font-weight: 400;
-	opacity: .8;
-	background: #f5f5f5;
 	border-radius: 3px 3px 0 0;
 }
 .modern-checkbox input[type="checkbox"] {
@@ -14919,12 +14921,12 @@ p.composition__item__detail {
 	top: -1px;
 	overflow: hidden;
 }
+#gift-modal:not(.show) {display: none !important};
 
 .bd-select .sod_select::before {
     top: 18px;
 }
-
-#gift-modal:not(.show) {display: none !important};
+#popover-ingridients-filter .row, .webui-popover .webui-popover-content, .scroll-wrapper > .scroll-content {overflow: hidden !important}
 
 /*.gift-progress-info .progress-container .native_text, .gift-progress-info .progress-container .hover_text { color: transparent; }*/
 
