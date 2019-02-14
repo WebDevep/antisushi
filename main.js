@@ -341,7 +341,6 @@ $(document).ready(function () {
 			$('#popover-ingridients-filter').css('opacity', '1');
 
 	});
-	$('.product-categories-container > div > div > nav .general-menu > li:nth-last-child(1)').after('<li><a href="#">Кон.</a></li>');
 
 /* MODIFICATIONS BY AROBOT END */
 
