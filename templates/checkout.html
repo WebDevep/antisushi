@@ -24,6 +24,7 @@
 </script>  -->
 
 {{ template "header" . }}
+
 <body class="  index-page fixed-header">
 	<div id="preloader"><div class="preloader__spinner"><div class="spinner"></div></div></div>
 {{ template "menu" . }}
@@ -395,12 +396,23 @@
 
 <h1 class="font-fix">Оформление заказа</h1>
 
-
 <div class="checkout-form">
 	<form id="checkout-form" method="post">
 		<input type="hidden" name="CSRF" value=""/>
 		<div class="col-lg-5 col-xl-5 col-sm-12 col-md-12 col-xs-12 order-content-cont push-xl-7 push-lg-7">
 				<div class="checkout-title">Состав заказа</div>
+				<script>
+					$.ajax({
+					  type: 'post',
+					  dataType: "json",
+					  url: '/bd/basket/?getBasket',
+					  data: { 'Session':Session },
+					  success: function(data) {
+					  	checkoutprice(data);
+						renderSummary(data);
+					  }
+					});					
+				</script>
 				<ul class="order-content">
 				<li class="person basket-item row">
 					<div class="col-xs-2">
@@ -419,6 +431,13 @@
 				<input type="hidden" name="IDS" value=""/> 
 				<input type="hidden" name="AMOUNTS" value=""/> 
 		</div>
+		<script>
+			$(document).ready(function () {
+				$('.order-content .basket-item:not(.person)').each(function() {
+					$(this).remove()
+				})
+			})
+		</script>
 		
 		<div class="col-xs-1 hidden-md-down"></div>
 		<div class="col-lg-6 col-xl-6 col-sm-12 col-md-12 col-xs-12 delivery-col pull-xl-6 pull-lg-6">
@@ -787,61 +806,21 @@
 <script>getcheckoutbasket()</script>
 {{ end }}
 
-{{ if .IsMobile }}
-
-<!-- MOBILE START -->
-
-	<link href="/assets/css/mobile/style.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/mobile/roboto.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/mobile/flickity.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/mobile/currency.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/mobile/custom.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/mobile/selectordie.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/mobile/reset.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/mobile/template_styles.css" type="text/css" rel="stylesheet">
-	<link href="/assets/css/jquery.scrollbar.css" type="text/css" rel="stylesheet">
-	<link href="/assets/jquery/jquery-ui.min.css" type="text/css" rel="stylesheet">	
-	
-	<script type="text/javascript" src="/assets/jquery/jquery-ui.min.js"></script>
-	<script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
-	<script type="text/javascript" src="/assets/js/popper.js"></script>
-	<script type="text/javascript" src="/assets/js//jquery.mask.min.js"></script>	
-	<script type="text/javascript" src="/assets/js/flickity.pkgd.js"></script>
-	<script type="text/javascript" src="/assets/js/mobile/jquery.mmenu.all.min.umd.js"></script>
-	<script type="text/javascript" src="/assets/js/mobile/selectordie.js"></script>
-	<script type="text/javascript" src="/assets/js/mobile/sourcebuster.min.js"></script>
-	<script type="text/javascript" src="/assets/js/jquery.scrollbar.js"></script>
-	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-	
-<!-- MOBILE END -->
-
-{{ else }}
-
 <!-- PC START -->
 
-   <link href="/assets/css/style.css" type="text/css" rel="stylesheet">
-   <link href="/assets/css/animate.css" type="text/css" rel="stylesheet">
-   <link href="/assets/css/jquery.fancybox.css" type="text/css" rel="stylesheet"> 
-   <link href="/assets/css/flickity.css" type="text/css" rel="stylesheet">
-   <link href="/assets/jquery/jquery-ui.min.css" type="text/css" rel="stylesheet">
-   <link href="/assets/css/jquery.scrollbar.css" type="text/css" rel="stylesheet">
-   <link href="/assets/css/jquery.webui-popover.css" rel="stylesheet">
-   <link href="/assets/css/selectordie.css" type="text/css" rel="stylesheet">
-   <link href="/assets/css/roboto.css" type="text/css" rel="stylesheet">
-   <link href="/assets/css/currency.css" type="text/css" rel="stylesheet">
-
-	<script type="text/javascript" src="/assets/jquery/jquery-ui.min.js"></script>
+	<link href="/assets/css/jquery.webui-popover.css" rel="stylesheet">
+	<script type="text/javascript" async src="/assets/jquery/jquery-ui.min.js"></script>
 	<script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
 	<script type="text/javascript" src="/assets/js/popover.js"></script>
-	<script type="text/javascript" src="/assets/js/popper.js"></script>
-	<script type="text/javascript" src="/assets/js/jquery.fancybox.pack.js"></script>
-	<script type="text/javascript" src="/assets/js/jquery.scrollbar.js"></script>
-	<script type="text/javascript" src="/assets/js/jquery.mask.min.js"></script>	
-	<script type="text/javascript" src="/assets/js/flickity.pkgd.js"></script>
-	<script type="text/javascript" src="/assets/js/selectordie.js"></script>
-	<script type="text/javascript" src="/assets/js/modal.js"></script>
-	<script type="text/javascript" src="/assets/js/infinite-scroll.js"></script>
-	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" async src="/assets/js/popper.js"></script>
+	<script type="text/javascript" async src="/assets/js/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" async src="/assets/js/jquery.scrollbar.js"></script>
+	<script type="text/javascript" async src="/assets/js/jquery.mask.min.js"></script>	
+	<script type="text/javascript" async src="/assets/js/flickity.pkgd.js"></script>
+	<script type="text/javascript" async src="/assets/js/selectordie.js"></script>
+	<script type="text/javascript" async src="/assets/js/modal.js"></script>
+	<script type="text/javascript" async  src="/assets/js/infinite-scroll.js"></script>
+	<script type="text/javascript" async src="/assets/js/bootstrap.min.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -849,8 +828,6 @@
     <![endif]-->
 
 <!-- PC END -->
-
-{{ end }}
 
 </body>
 
