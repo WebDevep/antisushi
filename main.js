@@ -34,45 +34,6 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
 }
 
 $(document).ready(function () {
-	jQuery(function($){
-		$(document).mouseup(function (e){
-			var gifts = $(".gift-sticky .expanded-gift.open");
-			if (!gifts.is(e.target) && gifts.has(e.target).length === 0) {
-				$('.gift-sticky .gift-toggle').click();
-			}
-			var giftsPopup = $("#gift-modal");
-			if (!giftsPopup.is(e.target) && giftsPopup.has(e.target).length === 0) {
-				$('#gift-modal').removeClass('show');
-				$('.modal-backdrop').removeClass('show');
-				$('.modal-backdrop').remove();
-			}
-			var filter = $("#ingridients-filter"), filterA=$('.products-sub-menu .filter-link-wrapper');
-			if ( (!filter.is(e.target) && filter.has(e.target).length === 0) &&
-			(!filterA.is(e.target)) ) {
-				$('#popover-ingridients-filter').hide();
-			}
-		});
-	});
-
-	$('#callback-form input[name="agreement"]').wrap('<span class="modern-checkbox"></span>');
-	$('#callback-form .modern-checkbox').append('<span class="checkbox"></span>');
-
-	$('body').on('click','#callback-form .modern-checkbox .checkbox',function(e) {
-		$(this).toggleClass('active');
-		if ($(this).hasClass('active')) {
-			$(this).parent().find('input[type="checkbox"]').prop('checked',true);
-		} else {
-			$(this).parent().find('input[type="checkbox"]').prop('checked',false);
-		}
-	});
-
-	$('body').on('click','#callback-form label[for="agreement"] .modern-checkbox .checkbox',function(e) {
-		if (($('#callback-form input[name="name"]').val().length > 1) && ($('#callback-form input[name="phone"]').val().length > 16) && ($('#callback-form [name="agreement"]').is(':checked')))
-			$('#callback-form [type="submit"]').prop('disabled', false);
-		else
-			$('#callback-form [type="submit"]').prop('disabled', true);		
-	});
-
 	if ($('.not-empty-basket .basket-sum > span').length > 0)
 		if ($('.not-empty-basket .basket-sum > span').html() != '') {
 			$('.not-empty-basket').css('display','block');
@@ -244,7 +205,7 @@ $(document).ready(function () {
 	})
 	$('#callback-form').on('submit',function(e) {
 		e.preventDefault();
-		json_data= jQuery.parseJSON ('{"name":"'+$('#callback-form [name="name"]').val()+'","phone":"'+$('#callback-form [name="phone"]').val()+'","session":"'+Session+'"}');		
+		json_data= {"name":$('#callback-form [name="name"]').val(),"phone":$('#callback-form [name="phpne"]').val(),"session":Session};
 		console.log(json_data);
 
 		$.ajax({
@@ -405,9 +366,6 @@ $(function() {
 			$('.collapsed-gift').hide();
 			return false;
 		})
-		$('.collapsed-gift .gift-toggle').on('click',function(e){
-			renderBasket();
-		})
 		$('.expanded-gift .gift-toggle').on('click',function(e){
 			e.preventDefault();
 			$('.expanded-gift').removeClass('open').hide();
@@ -427,6 +385,7 @@ function test1() {
 
 
 //  auth
+
 
 $(document).ready(function () {
 	$('.auth-btn').on('click', function(e){
@@ -1035,6 +994,14 @@ $(function basket() {
 				$('.basket-btn .close-basket').show();
 			}
 			onH = function(){
+				// if (!$("body").is(".basket-btn"))
+				// 	$(".basket-btn").prepend('span class=""')
+				// if (!$(".basket-btn").is(".not-empty-basket")) $(".basket-btn").prepend('span class=""')
+
+
+				// <div class="not-empty-basket" style="display: block;">
+    //               <svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg><span class="basket-sum"><span>7 140</span></span><svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg><svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg></div>
+
 				$('.basket-btn .not-empty-basket').show();
 				$('.basket-btn .empty-basket').hide();
 				$('.basket-btn .close-basket').hide();
@@ -1042,6 +1009,7 @@ $(function basket() {
 					$('.product-info-cont .close-view').trigger('click');
 			}
 		}
+			
 			$('.basket-btn').webuiPopover({url:$target,id_:$id,animation: 'fade', onShow: onS,onHide: onH, cache: true,placement: 'bottom-left', container: '.product-categories-container'});
 //  };
 	});
@@ -1083,25 +1051,7 @@ function renderBasket(){
 	  dataType: "json",
 	  url: '/bd/basket/?getBasket',
 	  data: {'url': url, 'Session':Session},
-	  success: function (data) {
-	  	renderBasketItems(data);
-		if (data['BasketPrice']) {
-			if (data['BasketPrice'] > 3000) {
-				$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(1) .get-gift').css('display','block');
-			} else {
-				$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(1) .get-gift').css('display','none');
-				if (data['BasketPrice'] > 2000) {
-					$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(2) .get-gift').css('display','block');
-				} else {
-					$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(2) .get-gift').css('display','none');
-					if (data['BasketPrice'] > 1250) {
-						$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(3) .get-gift').css('display','block');
-					} else
-						$('.gift-sticky .expanded-gift .gifts-list .gift-item:nth-of-type(3) .get-gift').css('display','none');
-				}
-			}
-		}
-	  }
+	  success: renderBasketItems
 	});
 }
 
@@ -1573,6 +1523,7 @@ function renderSummary(data){
 		$('.empty-basket').show();
 		$('.not-empty-basket').hide()
 	}
+
 	calcGifts(data.GiftPrice);
 }
 
@@ -1753,9 +1704,7 @@ $(document).ready(function () {
 				$('.btn-get-gift').text('Выбрать');
 				$('.product.gift:not(.masked) .get-gift-btn').text('Выбрать');
 				$('.get-gift-btn').removeClass('reset-gifts');
-				$('#gift-modal .product.gift.masked').each(function() {
-					$(this).removeClass('masked');
-				});
+				$('.product.gift.masked').each(function() { $(this).removeClass('masked)'); })
 				$(this).removeClass('reset-gifts');
 				return 1;
 			}
@@ -1812,6 +1761,7 @@ $(document).ready(function () {
 $(window).on('load',function() {
 	getcheckoutbasket();
 	$('#preloader').hide();
+	renderBasket();
 })
 $(document).ready(function () {
 	$('li.dropdown').hover(function() {
@@ -1920,20 +1870,7 @@ function getcheckoutbasket(){
 	  dataType: "json",
 	  url: '/bd/basket/?getBasket',
 	  data: { 'Session':Session },
-	  success: function(data) {
-		// checkoutbasket(data);
-		if (data['BasketPrice']) {
-			if ($('.not-empty-basket .basket-sum').length <= 0) $('.not-empty-basket').append('<span class="basket-sum"><span>'+data['BasketPrice']+'</span></span>');
-			if ($('.not-empty-basket .basket-sum > svg').length <= 0) $('.not-empty-basket').append('<svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg>');
-			if ($('.not-empty-basket .basket-sum > span').length > 0)
-				if ( ($('.not-empty-basket .basket-sum > span').html() != '') && ($('.not-empty-basket .basket-sum > span').html() != '0') ) {
-					$('.not-empty-basket').css('display','block');
-				} else {
-					$('.not-empty-basket').css('display','none');
-				}
-		}
-		console.log(data)
-	  }
+	  success: checkoutbasket
 	});
 };
 
