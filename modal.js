@@ -61,10 +61,12 @@ $(window).scroll(function() {
 				showedProducts+= 8;
 				$('#preloader').hide();
 			}
-
+			console.clear()
 			if ( (productsCount < 8) || (showedProducts >= productsCount) ) $('#btn-show-more').hide();
-		}		
-	}	
+			console.log('showedProducts '+showedProducts)
+			console.log('productsCount '+productsCount)
+		}
+	}
 });
 
 $(document).ready(function () {
@@ -113,6 +115,10 @@ $(document).ready(function () {
 		}
 	});
 
+	$('label[for="agreement"]').on('click',function(e) {
+		e.preventDefault();
+		$(this).find('.checkbox').click()
+	})
 	$('body').on('click','#callback-form label[for="agreement"] .modern-checkbox .checkbox',function(e) {
 		if (($('#callback-form input[name="name"]').val().length > 1) && ($('#callback-form input[name="phone"]').val().length > 16) && ($('#callback-form [name="agreement"]').is(':checked')))
 			$('#callback-form [type="submit"]').prop('disabled', false);
