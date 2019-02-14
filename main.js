@@ -61,10 +61,8 @@ $(window).scroll(function() {
 				showedProducts+= 8;
 				$('#preloader').hide();
 			}
-			console.clear()
+
 			if ( (productsCount < 8) || (showedProducts >= productsCount) ) $('#btn-show-more').hide();
-			console.log('showedProducts '+showedProducts)
-			console.log('productsCount '+productsCount)	
 		}		
 	}	
 });
@@ -1774,10 +1772,9 @@ $(document).ready(function () {
 		return false;
 	});
 	
-	if($('.get-gift-btn').length){
-		$('.get-gift-btn').on('click',function(e){
+	// if($('.get-gift-btn').length){
+		$('body').on('click','.get-gift-btn.reset-gifts',function(e){
 			e.preventDefault();
-			var isReset= false;
 			if ($(this).hasClass('reset-gifts')) {
 				isReset= true;
 				$('#products-list .basket-item').each(function() {
@@ -1787,18 +1784,21 @@ $(document).ready(function () {
 					}
 				})
 				$('.product gift.masked').removeClass('masked');
-				// alert($('.get-gift').text());
 				$('.get-gift').text('Выбрать');
 				$('.get-gift-btn').text('Выбрать');
-				// alert($('.get-gift').text());
 				$('.btn-get-gift').text('Выбрать');
 				$('.product.gift:not(.masked) .get-gift-btn').text('Выбрать');
 				$('.get-gift-btn').removeClass('reset-gifts');
 				$('.product.gift.masked').each(function() { $(this).removeClass('masked)'); })
 				$(this).removeClass('reset-gifts');
-				return 1;
+				$('#gift-modal').addClass('show');
+				if (!$('.modal-backdrop').length)
+					$('body').append('<div class="modal-backdrop fade show" style="display: block;"></div>');
+				$('.modal-backdrop').addClass('show');
 			}
-
+		});
+		$('body').on('click','.get-gift-btn:not(.reset-gifts)',function(e){
+			e.preventDefault();
 			var $self = $(this).closest('.product');
 			var data = ('gift');
 			$.ajax({
@@ -1820,11 +1820,10 @@ $(document).ready(function () {
 					//    console.log(BX.message('good_luck_bitch'))
 					//}
 				}
-			});
-			if (!isReset) {
-				$('#gift-modal').hide();
-				$('.modal-backdrop').remove();
-			}
+			})
+				
+			$('#gift-modal').hide();
+			$('.modal-backdrop').remove();
 		});
 //        $('.get-another-gift-btn').on('click',function(e){
 //            e.preventDefault();
@@ -1845,7 +1844,7 @@ $(document).ready(function () {
 //            });
 //
 //        });
-	}
+	// }
 });
 
 // menu
