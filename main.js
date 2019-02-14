@@ -41,8 +41,7 @@ $(window).on('load',function() {
 		$('#preloader').hide();
 	}, 300);
 	renderBasket();
-	$('#popover-basket').removeClass('in');
-	$('#popover-basket').addClass('fade-out');
+	$('.basket-btn').click()
 })
 
 $(window).scroll(function() {
