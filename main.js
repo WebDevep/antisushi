@@ -61,10 +61,12 @@ $(window).scroll(function() {
 				showedProducts+= 8;
 				$('#preloader').hide();
 			}
-
+			console.clear()
 			if ( (productsCount < 8) || (showedProducts >= productsCount) ) $('#btn-show-more').hide();
-		}		
-	}	
+			console.log('showedProducts '+showedProducts)
+			console.log('productsCount '+productsCount)
+		}
+	}
 });
 
 $(document).ready(function () {
@@ -113,6 +115,10 @@ $(document).ready(function () {
 		}
 	});
 
+	$('label[for="agreement"]').on('click',function(e) {
+		e.preventDefault();
+		$(this).find('.checkbox').click()
+	})
 	$('body').on('click','#callback-form label[for="agreement"] .modern-checkbox .checkbox',function(e) {
 		if (($('#callback-form input[name="name"]').val().length > 1) && ($('#callback-form input[name="phone"]').val().length > 16) && ($('#callback-form [name="agreement"]').is(':checked')))
 			$('#callback-form [type="submit"]').prop('disabled', false);
@@ -332,8 +338,7 @@ $(document).ready(function () {
 
 		if ($('#popover-ingridients-filter').css('opacity')< 1)
 			$('#popover-ingridients-filter').css('opacity', '1');
-		else
-			$('#popover-ingridients-filter').css('opacity', '0');
+
 	});
 	$('.product-categories-container > div > div > nav .general-menu > li:nth-last-child(1)').after('<li><a href="#">Кон.</a></li>');
 
@@ -1236,6 +1241,10 @@ function addBasketEvents(){
 			dataType: "json",
 			url: '/bd/basket/?changeAmount',
 			success: function(data){
+				console.clear()
+				console.log('TRIGGER')
+				console.log(data)
+
 				var has_gift = false;
 				//console.log(data);
 				$.each(data.products,function(i,item){
@@ -1256,11 +1265,62 @@ function addBasketEvents(){
 				}
 				renderBasketItems(data);
 				renderSummary(data);
+				$('.order-content li:not(.person').remove();
+				checkoutbasket(data);
 			}
 		});
 		}
 		return false;
 	});
+
+
+	// $('.basket-item .change-amount-btn').on('click',function(e){
+	// 	e.preventDefault();
+	// 	var $basket_item = $(this).closest('.basket-item');
+	// 	var current_val = $basket_item.find('.buttons').find('input[type="hidden"]').val();
+	// 	var new_val = parseInt(current_val);
+	// 	var product_id = $basket_item.data('id');
+	// 	var price = parseInt($basket_item.data('price'));
+	// 	if($(this).hasClass('plus')){
+	// 		new_val++;
+	// 	}else{
+	// 		new_val--;
+	// 	}
+	// 	if(new_val==0){
+	// 		new_val = 1;
+	// 		$(this).tooltip({trigger: 'hover', title: 'Если вы хотите удалить позицию, воспользуйтесь кнопкой справа', delay: {hide: 3000}})
+	// 		$(this).tooltip('show');
+	// 		setTimeout(function() {
+	// 		$('.tooltip').remove();
+	// 		}, 3000);
+	// 	}else{
+	// 	$(this).closest('.basket-item').find('.amount').text(new_val)
+
+	// 	$('[name="AMOUNTS"]').val('');
+	// 	var resultamounts = [];
+	// 	$('.buttons .amount').each(function(index){
+	// 	resultamounts.push($(this).text());
+	// 	});
+	// 	$('[name="AMOUNTS"]').val(resultamounts);
+	// 	var $form = $('#checkout-form');
+	// 	$.ajax({
+	// 		type: 'post',
+	// 		data: $form.serialize(),
+	// 		dataType: "json",
+	// 		url: '/bd/checkout/?validatedelivery',
+	// 		success: function(data){
+	// 			$('[name="IDS"]').val('');
+	// 			$('[name="AMOUNTS"]').val('');
+	// 			$('.order-content li:not(.person)').remove();
+	// 			checkoutbasket(data);
+	// 		}
+	// 	});
+	// 	}
+	// 	return false;
+	// });
+
+
+
 	$('.remove-basket-item a').off().on('click',function(e){
 
 		if($('.constructor-view').is(':visible')){
@@ -2050,49 +2110,50 @@ $(document).ready(function(){
 });
 
 function checkoutamount(){
-	$('.basket-item .change-amount-btn').on('click',function(e){
-		e.preventDefault();
-		var $basket_item = $(this).closest('.basket-item');
-		var current_val = $basket_item.find('.buttons').find('input[type="hidden"]').val();
-		var new_val = parseInt(current_val);
-		var product_id = $basket_item.data('id');
-		var price = parseInt($basket_item.data('price'));
-		if($(this).hasClass('plus')){
-			new_val++;
-		}else{
-			new_val--;
-		}
-		if(new_val==0){
-			new_val = 1;
-			$(this).tooltip({trigger: 'hover', title: 'Если вы хотите удалить позицию, воспользуйтесь кнопкой справа', delay: {hide: 3000}})
-			$(this).tooltip('show');
-			setTimeout(function() {
-			$('.tooltip').remove();
-			}, 3000);
-		}else{
-		$(this).closest('.basket-item').find('.amount').text(new_val)
-		$('[name="AMOUNTS"]').val('');
-		var resultamounts = [];
-		$('.buttons .amount').each(function(index){
-		resultamounts.push($(this).text());
-		});
-		$('[name="AMOUNTS"]').val(resultamounts);
-		var $form = $('#checkout-form');
-		$.ajax({
-			type: 'post',
-			data: $form.serialize(),
-			dataType: "json",
-			url: '/bd/checkout/?validatedelivery',
-			success: function(data){
-				$('[name="IDS"]').val('');
-				$('[name="AMOUNTS"]').val('');
-				$('.order-content li:not(.person)').remove();
-				checkoutbasket(data);
-			}
-		});
-		}
-		return false;
-	});
+	// $('.basket-item .change-amount-btn').on('click',function(e){
+	// 	e.preventDefault();
+	// 	var $basket_item = $(this).closest('.basket-item');
+	// 	var current_val = $basket_item.find('.buttons').find('input[type="hidden"]').val();
+	// 	var new_val = parseInt(current_val);
+	// 	var product_id = $basket_item.data('id');
+	// 	var price = parseInt($basket_item.data('price'));
+	// 	if($(this).hasClass('plus')){
+	// 		new_val++;
+	// 	}else{
+	// 		new_val--;
+	// 	}
+	// 	if(new_val==0){
+	// 		new_val = 1;
+	// 		$(this).tooltip({trigger: 'hover', title: 'Если вы хотите удалить позицию, воспользуйтесь кнопкой справа', delay: {hide: 3000}})
+	// 		$(this).tooltip('show');
+	// 		setTimeout(function() {
+	// 		$('.tooltip').remove();
+	// 		}, 3000);
+	// 	}else{
+	// 	$(this).closest('.basket-item').find('.amount').text(new_val)
+
+	// 	$('[name="AMOUNTS"]').val('');
+	// 	var resultamounts = [];
+	// 	$('.buttons .amount').each(function(index){
+	// 	resultamounts.push($(this).text());
+	// 	});
+	// 	$('[name="AMOUNTS"]').val(resultamounts);
+	// 	var $form = $('#checkout-form');
+	// 	$.ajax({
+	// 		type: 'post',
+	// 		data: $form.serialize(),
+	// 		dataType: "json",
+	// 		url: '/bd/checkout/?validatedelivery',
+	// 		success: function(data){
+	// 			$('[name="IDS"]').val('');
+	// 			$('[name="AMOUNTS"]').val('');
+	// 			$('.order-content li:not(.person)').remove();
+	// 			checkoutbasket(data);
+	// 		}
+	// 	});
+	// 	}
+	// 	return false;
+	// });
 	$('.remove-basket-item a').off().on('click',function(e){
 
 		if($('.constructor-view').is(':visible')){
