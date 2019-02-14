@@ -33,7 +33,56 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
 	return kw + kd;
 }
 
+var currentUrl='', showedProducts= 0;
+
+$(window).on('load',function() {
+	getcheckoutbasket();
+	setTimeout(function() { 
+		$('#preloader').hide();
+	}, 300);
+	renderBasket();
+})
+
+$(window).scroll(function() {
+	/* Страница - каталог */
+	if (currentUrl.indexOf('/catalog/') > -1) {	
+		productsCount= $('.product-list .product-ajax-cont').length
+		if (showedProducts < productsCount) {
+			if (($(window).scrollTop()+$(window).height()-100) > $('#btn-show-more').offset().top) {
+				productsCount= 0;
+				$('#preloader').show();
+				$('.product-list .product-ajax-cont').each(function() {
+					if (productsCount >= showedProducts+8)
+						$(this).addClass('hidden')
+					else 
+						$(this).removeClass('hidden');
+					productsCount++
+				});
+				showedProducts+= 8;
+				$('#preloader').hide();
+			}
+			console.clear()
+			if ( (productsCount < 8) || (showedProducts >= productsCount) ) $('#btn-show-more').hide();
+			console.log('showedProducts '+showedProducts)
+			console.log('productsCount '+productsCount)	
+		}		
+	}	
+});
+
 $(document).ready(function () {
+	currentUrl= window.location.href.split('?')[0].toLowerCase().replace('#','').replace('//','/').replace(' ','');
+
+	/* Страница - каталог */
+	if (currentUrl.indexOf('/catalog/') > -1) {
+		productsCount=0;
+		$('.product-list .product-ajax-cont').each(function() {
+			if (productsCount >= 8) $(this).addClass('hidden'); else	$(this).removeClass('hidden');
+			productsCount++
+		})
+		if (productsCount < 8) $('#btn-show-more').hide();
+		showedProducts= 8;
+	}
+
 	jQuery(function($){
 		$(document).mouseup(function (e){
 			var gifts = $(".gift-sticky .expanded-gift.open");
@@ -1039,7 +1088,7 @@ $(function basket() {
 
 
 				// <div class="not-empty-basket" style="display: block;">
-    //               <svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg><span class="basket-sum"><span>7 140</span></span><svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg><svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg></div>
+	//               <svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg><span class="basket-sum"><span>7 140</span></span><svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg><svg viewBox="0 0 32 32"><path d="M26.899,9C26.436,6.718,24.419,5,22,5H10C7.581,5,5.564,6.718,5.101,9H0l3,13c0,2.761,2.239,5,5,5h16c2.761,0,5-2.239,5-5 l3-13H26.899z M10,7h12c1.304,0,2.403,0.837,2.816,2H7.184C7.597,7.837,8.696,7,10,7z M27,22c-0.398,1.838-1.343,3-3,3H8 c-1.657,0-2.734-1.343-3-3L2.563,11H5v1h2v-1h18v1h2v-1h2.437L27,22z M10,21h12v-2H10V21z M9,17h14v-2H9V17z"></path></svg></div>
 
 				$('.basket-btn .not-empty-basket').show();
 				$('.basket-btn .empty-basket').hide();
@@ -1728,7 +1777,9 @@ $(document).ready(function () {
 	if($('.get-gift-btn').length){
 		$('.get-gift-btn').on('click',function(e){
 			e.preventDefault();
+			var isReset= false;
 			if ($(this).hasClass('reset-gifts')) {
+				isReset= true;
 				$('#products-list .basket-item').each(function() {
 					if($(this).hasClass('Подарок')) {
 						$(this).find('a').click();
@@ -1770,8 +1821,10 @@ $(document).ready(function () {
 					//}
 				}
 			});
-			$('#gift-modal').hide();
-			$('.modal-backdrop').remove();
+			if (!isReset) {
+				$('#gift-modal').hide();
+				$('.modal-backdrop').remove();
+			}
 		});
 //        $('.get-another-gift-btn').on('click',function(e){
 //            e.preventDefault();
@@ -1797,11 +1850,6 @@ $(document).ready(function () {
 
 // menu
 
-$(window).on('load',function() {
-	getcheckoutbasket();
-	$('#preloader').hide();
-	renderBasket();
-})
 $(document).ready(function () {
 	$('li.dropdown').hover(function() {
 		$(this).find('.dropdown-menu').show().delay(1).fadeIn(1);
