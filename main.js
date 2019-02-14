@@ -1,3 +1,4 @@
+
 function animateNumbers(elem,new_val){
 	$({val_i: parseInt($(elem).text().split(' ').join(''))}).animate({val_i: parseInt(new_val)}, {
 		duration: 500,
@@ -41,7 +42,8 @@ $(window).on('load',function() {
 		$('#preloader').hide();
 	}, 300);
 	renderBasket();
-	$('.basket-btn').click()
+	// $('.basket-btn').click()
+	// $('body').removeClass('hidden')
 })
 
 $(window).scroll(function() {
