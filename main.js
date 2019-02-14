@@ -42,6 +42,7 @@ $(window).on('load',function() {
 		$('#preloader').hide();
 	}, 300);
 	renderBasket();
+	setTimeout(function() {$('.basket-btn').click();$('#basket').css('display','block')},1000)
 	// $('.basket-btn').click()
 	// $('body').removeClass('hidden')
 })
