@@ -40,7 +40,6 @@ $(window).on('load',function() {
 	getcheckoutbasket();
 	renderBasket();
 	$('#basket-btn').click();
-	$('#preloader').fadeOut();
 
 	// $('.basket-btn').click()
 	// $('body').removeClass('hidden')
@@ -74,6 +73,7 @@ $(window).scroll(function() {
 
 $(document).ready(function () {
 	// setTimeout(function() { $('#preloader').fadeOut(), 1});
+	$('#preloader').fadeOut();
 	//3 вариант - лауд
 	
 
