@@ -34,6 +34,45 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
 }
 
 $(document).ready(function () {
+	jQuery(function($){
+		$(document).mouseup(function (e){
+			var gifts = $(".gift-sticky .expanded-gift.open");
+			if (!gifts.is(e.target) && gifts.has(e.target).length === 0) {
+				$('.gift-sticky .gift-toggle').click();
+			}
+			var giftsPopup = $("#gift-modal");
+			if (!giftsPopup.is(e.target) && giftsPopup.has(e.target).length === 0) {
+				$('#gift-modal').removeClass('show');
+				$('.modal-backdrop').removeClass('show');
+				$('.modal-backdrop').remove();
+			}
+			var filter = $("#ingridients-filter"), filterA=$('.products-sub-menu .filter-link-wrapper');
+			if ( (!filter.is(e.target) && filter.has(e.target).length === 0) &&
+			(!filterA.is(e.target)) ) {
+				$('#popover-ingridients-filter').hide();
+			}
+		});
+	});
+
+	$('#callback-form input[name="agreement"]').wrap('<span class="modern-checkbox"></span>');
+	$('#callback-form .modern-checkbox').append('<span class="checkbox"></span>');
+
+	$('body').on('click','#callback-form .modern-checkbox .checkbox',function(e) {
+		$(this).toggleClass('active');
+		if ($(this).hasClass('active')) {
+			$(this).parent().find('input[type="checkbox"]').prop('checked',true);
+		} else {
+			$(this).parent().find('input[type="checkbox"]').prop('checked',false);
+		}
+	});
+
+	$('body').on('click','#callback-form label[for="agreement"] .modern-checkbox .checkbox',function(e) {
+		if (($('#callback-form input[name="name"]').val().length > 1) && ($('#callback-form input[name="phone"]').val().length > 16) && ($('#callback-form [name="agreement"]').is(':checked')))
+			$('#callback-form [type="submit"]').prop('disabled', false);
+		else
+			$('#callback-form [type="submit"]').prop('disabled', true);		
+	});
+
 	if ($('.not-empty-basket .basket-sum > span').length > 0)
 		if ($('.not-empty-basket .basket-sum > span').html() != '') {
 			$('.not-empty-basket').css('display','block');
@@ -205,7 +244,7 @@ $(document).ready(function () {
 	})
 	$('#callback-form').on('submit',function(e) {
 		e.preventDefault();
-		json_data= {"name":$('#callback-form [name="name"]').val(),"phone":$('#callback-form [name="phpne"]').val(),"session":Session};
+		json_data= {"name":$('#callback-form [name="name"]').val(),"phone":$('#callback-form [name="phone"]').val(),"session":Session};
 		console.log(json_data);
 
 		$.ajax({
