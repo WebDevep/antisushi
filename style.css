@@ -3912,8 +3912,8 @@ header .product-categories-container nav ul li:hover a, header .product-categori
 	border-radius: 3px;
 	background-color: #ffffff;
 	border: solid 1px #b2bbbd;
-	width: 75px;
-	height: 27px;
+	width: 95px;
+	height: 37px;
 	font-size: 14px;
 	font-weight: 300;
 	font-stretch: condensed;
@@ -12040,10 +12040,6 @@ input[readonly] {
 	font-weight: 300;
 }
 
-.modal-open {
-  overflow: hidden;
-}
-
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
@@ -14674,7 +14670,7 @@ p.composition__item__detail {
 .align-center {margin-left: auto;margin-right: auto}
 .btn {
 	display: block;
-	height: 36px;
+	height: auto;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -14753,11 +14749,12 @@ p.composition__item__detail {
 .md-content h3 {
 	color: #000;
 	margin: 0;
-	padding: 18px 0 0 0;
+	padding: 18px 30px 0 0;
 	text-align: center;
 	font-size: 28px;
 	font-weight: 400;
 	border-radius: 3px 3px 0 0;
+	text-align: left
 }
 .modern-checkbox input[type="checkbox"] {
 	display:none;
@@ -14781,7 +14778,7 @@ p.composition__item__detail {
 	opacity: 1 !important;filter: alpha(opacity=100) !important;-ms-filter: "alpha(opacity=100)" !important;-khtml-opacity: 1 !important; -moz-opacity: 1 !important
 }
 .md-content > div {
-	padding: 0;
+    padding: 0 30px 0;
 	margin: 0;
 	font-weight: 300;
 	font-size: 1.15em;
@@ -14790,9 +14787,16 @@ p.composition__item__detail {
 }
 .md-content > div > p, .md-content-message {
 	padding-top: 12px !important;
+	text-align: left
 }
 .md-content {
 	color: #fff;
+}
+#callback-form {
+    text-align: left;
+}
+#callback-modal .md-content {
+    padding: 20px 48px 38px 48px;
 }
 .md-content label {
 	padding-left: 36px;
@@ -14848,25 +14852,26 @@ p.composition__item__detail {
 	margin: 12px auto;
 }
 .md-modal label {color: #555;}
-.md-modal .btn {width: auto;padding: 10px 16px 31px 16px}
+.md-modal .btn {width: auto;padding: 8px 16px 31px 8px}
 .modal-btn-close {
 	position: absolute;
 	z-index: 111;
-	right: 7px;
-	top: 2px;
+	right: 17px;
+	top: 12px;
 	background: url(/assets/images/close.svg);
 }
 .md-modal button, .md-modal button:hover, .modal-big-btn-close, .modal-big-btn-close:hover  {
 	-webkit-transition: All 0.25s ease;-moz-transition: All 0.25s ease;-o-transition: All 0.25s ease;-ms-transition: All 0.25s ease;transition: All 0.25s ease;
-	background-color: #de002b;
-	border-color: #de002b;
-	color: #ffffff;
+	border-color: #ff4157;
+	background: #ff4157;
+	color: #fff;
 	font-size: 14px;
 	font-weight: bold;
 	border: none;
 	border-radius: 4px;
+	margin: 32px 0 auto
 }
-	.md-modal button[disabled] {background-color: #de002b;border-color: #de002b}
+	.md-modal button[disabled] { border-color: #ff4157;	background: #ff4157; color: #fff; }
 
 #popover-ingridients-filter {
     width: 445px;
@@ -14957,7 +14962,8 @@ p.composition__item__detail {
 }
 #popover-ingridients-filter .row, .webui-popover .webui-popover-content, .scroll-wrapper > .scroll-content {overflow: hidden !important}
 
-/*.gift-progress-info .progress-container .native_text, .gift-progress-info .progress-container .hover_text { color: transparent; }*/
+.ingridients-filter-btn {display: none !important}
+.auth-state.logged-in-state .bonuses .title {margin-bottom: 6px}
 
 @media screen and (max-width: 479px) {
 	#callback-modal {width: auto}
